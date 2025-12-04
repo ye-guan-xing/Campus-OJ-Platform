@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: $color-light-bg;
+  color: $color-text-main;
+  line-height: 1.6;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.card {
+  background: #fff;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: $color-primary;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+  }
+
+  &.btn-danger {
+    background-color: $color-danger;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $color-secondary;
+  margin-bottom: $spacing-md;
+}

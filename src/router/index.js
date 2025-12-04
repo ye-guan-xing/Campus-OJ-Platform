@@ -1,26 +1,61 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
+import { createRouter, createWebHistory } from "vue-router";
+import routes from "./routes";
+import store from "@/store";
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes: routes,
+  scrollBehavior(to, from, savedPosition) {
+    return savedPosition ? savedPosition : { top: 0 };
+  },
+});
+
+// 白名单
+const whiteList = ["/login"];
+
+// 路由守卫
+router.beforeEach(async (to, from, next) => {
+  // 设置页面标题
+  if (to.meta.title) {
+    document.title = `${to.meta.title} - OJ平台`;
+  }
+
+  const hasToken = store.getters.token;
+
+  if (hasToken) {
+    if (to.path === "/login") {
+      next({ path: "/" });
+    } else {
+      const hasUserInfo = store.getters.userInfo;
+      if (hasUserInfo) {
+        // 管理员权限判断（适配roles数组）
+        if (to.meta.requiresAdmin) {
+          const isAdmin = store.getters.userInfo.roles?.includes("admin");
+          isAdmin ? next() : next({ path: "/" });
+        } else {
+          next();
+        }
+      } else {
+        try {
+          await store.dispatch("user/getInfo");
+          // 再次验证管理员权限
+          if (
+            to.meta.requiresAdmin &&
+            !store.getters.userInfo.roles?.includes("admin")
+          ) {
+            next({ path: "/" });
+          } else {
+            next();
+          }
+        } catch (error) {
+          await store.dispatch("user/resetToken");
+          next(`/login?redirect=${to.path}`);
+        }
+      }
+    }
+  } else {
+    whiteList.includes(to.path) ? next() : next(`/login?redirect=${to.path}`);
+  }
 });
 
 export default router;
