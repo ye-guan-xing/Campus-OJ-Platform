@@ -242,31 +242,104 @@ const handleCancel = () => {
   router.push("/admin/problems");
 };
 
-// 提交表单
+// 提交表单 - 添加详细调试日志
 const handleSubmit = async () => {
+  console.log("=== 表单提交开始 ===");
+  console.log("编辑模式:", props.isEdit);
+  console.log("表单初始数据:", JSON.stringify(props.initialData, null, 2));
+  console.log("当前表单数据:", JSON.stringify(form, null, 2));
+
   try {
+    console.log("1. 开始表单验证...");
     // 先校验整个表单（包括测试点）
     await formRef.value.validate();
+    console.log("✅ 表单验证通过");
+
     submitting.value = true;
 
     // 更新测试点数量
     form.testPointNum = form.testPointList.length;
+    console.log("测试点数量:", form.testPointNum);
+
+    // 准备提交数据
+    const submitData = {
+      ...form,
+      testPointList: form.testPointList.map((item) => ({
+        ...item,
+        isSample: Number(item.isSample), // 确保是数字
+      })),
+    };
+
+    console.log("2. 准备提交的数据:", JSON.stringify(submitData, null, 2));
+    console.log("是否有id字段:", "id" in submitData, "id值:", submitData.id);
+
+    console.log("3. 调用API接口...");
+    console.log("API函数:", props.isEdit ? "updateProblem" : "addProblem");
 
     // 调用后端接口
     const res = props.isEdit
-      ? await problemAdminAPI.updateProblem(form)
-      : await problemAdminAPI.addProblem(form);
+      ? await problemAdminAPI.updateProblem(submitData)
+      : await problemAdminAPI.addProblem(submitData);
 
-    if (res.code === 1) {
+    console.log("4. API响应:", res);
+    console.log("响应类型:", typeof res);
+    console.log("响应是否数组:", Array.isArray(res));
+
+    if (res) {
+      console.log("响应对象属性:", Object.keys(res));
+      console.log("是否有code属性:", "code" in res);
+      console.log("code值:", res.code);
+      console.log("是否有message属性:", "message" in res);
+      console.log("message值:", res.message);
+      console.log("是否有data属性:", "data" in res);
+      console.log("是否有id属性:", "id" in res);
+      console.log("是否有title属性:", "title" in res);
+    } else {
+      console.warn("API响应为空或undefined");
+    }
+
+    console.log("5. 处理API响应...");
+    // 🌟 安全地检查res.code，兼容多种格式
+    if (res && res.code === 1) {
+      console.log("✅ 操作成功 (code=1)");
+      emit("submit-success"); // 通知父组件跳转
+    } else if (res && (res.id || res.title)) {
+      console.log("✅ 操作成功 (直接返回题目对象)");
+      emit("submit-success"); // 通知父组件跳转
+    } else if (res && Object.keys(res).length === 0) {
+      console.log("✅ 操作成功 (空对象响应)");
+      emit("submit-success"); // 通知父组件跳转
+    } else if (!res) {
+      console.log("✅ 操作成功 (无响应体)");
       emit("submit-success"); // 通知父组件跳转
     } else {
-      ElMessage.error(res.message || (props.isEdit ? "更新失败" : "创建失败"));
+      console.error("❌ 操作失败");
+      const errorMsg =
+        res?.message || res?.msg || (props.isEdit ? "更新失败" : "创建失败");
+      console.error("错误信息:", errorMsg);
+      ElMessage.error(errorMsg);
     }
   } catch (err) {
-    console.error("表单提交失败:", err);
-    ElMessage.error("表单校验失败，请检查必填项");
+    console.error("=== 表单提交异常 ===");
+    console.error("错误类型:", err.constructor.name);
+    console.error("错误消息:", err.message);
+    console.error("错误堆栈:", err.stack);
+
+    // 检查是否是表单验证错误
+    if (err.fields) {
+      console.error("验证失败字段:", Object.keys(err.fields));
+      console.error("详细验证错误:", err.fields);
+      ElMessage.error("表单校验失败，请检查必填项");
+    } else if (err.message && err.message.includes("Network")) {
+      console.error("网络错误");
+      ElMessage.error("网络错误，请检查连接");
+    } else {
+      console.error("其他错误");
+      ElMessage.error(`提交失败: ${err.message || "未知错误"}`);
+    }
   } finally {
     submitting.value = false;
+    console.log("=== 表单提交结束 ===");
   }
 };
 </script>

@@ -32,7 +32,6 @@ export const problemAdminAPI = {
       data,
     });
   },
-
   //删除题目
   deleteProblem: async (id) => {
     if (USE_MOCK) {
@@ -72,59 +71,60 @@ export const problemAdminAPI = {
       data: data,
     });
   },
-
-  // 题目分页查询
+  // 题目分页查询 - 最终修正版
   getProblemsByPage: async (params) => {
     if (USE_MOCK) {
       await mockDelay(300);
       try {
         const { pageNum = 1, size = 10, keyword } = params;
 
-        // 直接从mockStorage获取分页数据
-        const pageResult = mockStorage.getProblemsByPage(pageNum, size);
+        // 获取所有题目
+        let problems = mockStorage.getProblems();
 
-        // 如果有搜索关键词，进行过滤
+        // 关键词过滤
         if (keyword && keyword.trim()) {
           const keywordLower = keyword.toLowerCase();
-          const filteredProblems = pageResult.records.filter(
+          problems = problems.filter(
             (p) =>
-              p.title.toLowerCase().includes(keywordLower) ||
-              p.label.toLowerCase().includes(keywordLower)
+              p.title?.toLowerCase().includes(keywordLower) ||
+              p.label?.toLowerCase().includes(keywordLower)
           );
-
-          return {
-            code: 1,
-            data: {
-              records: filteredProblems,
-              total: filteredProblems.length,
-              pageNum,
-              size,
-            },
-            message: "查询成功",
-          };
         }
 
+        // 手动分页
+        const start = (pageNum - 1) * size;
+        const end = start + size;
+        const pageData = problems.slice(start, end);
+
+        // 返回前端期望的格式
         return {
           code: 1,
-          data: pageResult,
+          data: {
+            list: pageData,
+            total: problems.length,
+            pageNum: pageNum,
+            size: size,
+          },
           message: "查询成功",
         };
       } catch (error) {
         console.error("Mock数据查询失败:", error);
         return {
           code: 0,
-          data: { records: [], total: 0 },
+          data: { list: [], total: 0 },
           message: "查询失败",
         };
       }
     }
 
+    // 真实后端请求
     return request({
       url: "/testQuestion/getTestQuestionByPage",
       method: "GET",
       params: {
-        pageNum: 1, // 页码，从1开始（根据实际需求调整）
-        size: 10, // 每页显示的数据条数（根据实际需求调整）
+        pageNum: params.pageNum,
+        size: params.size,
+        keyword: params.keyword || "",
       },
     });
   },

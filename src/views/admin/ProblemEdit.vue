@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from "vue"; // 把watch也合并到顶部导入，更规范
+import { ref, onMounted, computed, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
 import ProblemForm from "@/components/admin/ProblemForm.vue";
@@ -38,12 +38,7 @@ const loadProblemDetail = async () => {
 
   try {
     const problemId = Number(route.params.id);
-    console.log(
-      "【加载详情】转换后的problemId:",
-      problemId,
-      "是否有效:",
-      !isNaN(problemId)
-    );
+    console.log("【加载详情】要加载的题目ID:", problemId);
 
     if (!problemId) {
       ElMessage.error("无效的题目ID");
@@ -52,23 +47,76 @@ const loadProblemDetail = async () => {
     }
 
     // 调用API获取响应
+    console.log("【加载详情】开始调用 getProblemById...");
     const res = await problemAdminAPI.getProblemById(problemId);
-    console.log("【加载详情】getProblemById接口响应:", res);
 
-    // 第一步：判断接口调用是否成功（根据code）
-    if (res.code !== 1) {
-      ElMessage.error(`获取题目失败：${res.message || "未知错误"}`);
+    // 🌟 详细的调试信息
+    console.log("【加载详情】完整响应:", res);
+    console.log("【加载详情】响应类型:", typeof res);
+    console.log("【加载详情】响应是否为null:", res === null);
+    console.log("【加载详情】响应是否为undefined:", res === undefined);
+    console.log("【加载详情】响应是否为对象:", typeof res === "object");
+    console.log("【加载详情】响应是否为数组:", Array.isArray(res));
+
+    if (res) {
+      console.log("【加载详情】响应有哪些属性:", Object.keys(res));
+      console.log("【加载详情】是否有code属性:", "code" in res);
+      console.log("【加载详情】code值:", res.code);
+      console.log("【加载详情】是否有data属性:", "data" in res);
+      console.log("【加载详情】data值:", res.data);
+      console.log("【加载详情】是否有id属性:", "id" in res);
+      console.log("【加载详情】是否有title属性:", "title" in res);
+      console.log("【加载详情】JSON字符串:", JSON.stringify(res, null, 2));
+    }
+
+    // 🌟 核心修改：不再假设一定有 code 字段
+    let problem = null;
+
+    // 情况1：返回 { code: 1, data: {...} }
+    if (res && res.code === 1 && res.data) {
+      console.log("【加载详情】格式1: 标准格式 {code: 1, data: {...}}");
+      problem = res.data;
+    }
+    // 情况2：直接返回题目对象（后端可能直接返回）
+    else if (res && (res.id !== undefined || res.title !== undefined)) {
+      console.log("【加载详情】格式2: 直接返回题目对象");
+      problem = res;
+    }
+    // 情况3：返回 { data: {...} } 但没有 code
+    else if (
+      res &&
+      res.data &&
+      (res.data.id !== undefined || res.data.title !== undefined)
+    ) {
+      console.log("【加载详情】格式3: 返回 {data: 题目对象}");
+      problem = res.data;
+    }
+    // 情况4：返回空对象或 null
+    else if (!res || Object.keys(res).length === 0) {
+      console.log("【加载详情】格式4: 返回空对象或null");
+      ElMessage.error("题目不存在或已被删除");
       router.push("/admin/problems");
       return;
     }
+    // 情况5：未知格式，尝试直接使用
+    else {
+      console.warn("【加载详情】格式5: 未知格式，尝试直接使用");
+      problem = res;
+    }
 
-    // 第二步：提取题目数据（res.data）
-    const problem = res.data;
     console.log("【加载详情】提取的题目数据:", problem);
 
-    // 第三步：判断题目数据是否有效（含id）
-    if (!problem || !problem.id) {
-      ElMessage.error("获取题目详情失败：无有效题目数据");
+    // 判断题目数据是否有效（更宽松的判断）
+    if (!problem || (problem.id === undefined && problem.title === undefined)) {
+      console.error("【加载详情】数据无效:", problem);
+
+      // 尝试获取错误信息
+      let errorMsg = "获取题目详情失败";
+      if (res && res.message) errorMsg = res.message;
+      else if (res && res.msg) errorMsg = res.msg;
+      else if (res && res.error) errorMsg = res.error;
+
+      ElMessage.error(errorMsg);
       router.push("/admin/problems");
       return;
     }
@@ -77,17 +125,22 @@ const loadProblemDetail = async () => {
     problemData.value = {
       ...problem,
       testPointList: (problem.testPointList || []).map((item) => ({
-        ...item,
+        input: item.input || "",
+        output: item.output || "",
         isSample: String(item.isSample || "1"),
       })),
     };
-    console.log("【加载详情】赋值后的problemData:", problemData.value);
+
+    console.log("【加载详情】最终数据:", problemData.value);
+    ElMessage.success("题目数据加载成功");
   } catch (err) {
     console.error("【加载详情异常】错误对象:", err);
-    ElMessage.error("网络错误或题目不存在");
+    console.error("【加载详情异常】错误堆栈:", err.stack);
+    ElMessage.error(`网络错误: ${err.message}`);
     router.push("/admin/problems");
   } finally {
     loading.value = false;
+    console.log("【加载详情】函数执行完成");
   }
 };
 
