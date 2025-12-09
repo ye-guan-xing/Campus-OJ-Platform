@@ -135,7 +135,6 @@
 </template>
 
 <script setup>
-/* global defineProps, defineEmits */
 import { ref, reactive, watch } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
@@ -286,31 +285,71 @@ const handleSubmit = async () => {
     console.log("响应是否数组:", Array.isArray(res));
 
     if (res) {
-      console.log("响应对象属性:", Object.keys(res));
-      console.log("是否有code属性:", "code" in res);
-      console.log("code值:", res.code);
-      console.log("是否有message属性:", "message" in res);
-      console.log("message值:", res.message);
-      console.log("是否有data属性:", "data" in res);
-      console.log("是否有id属性:", "id" in res);
-      console.log("是否有title属性:", "title" in res);
+      // 🌟 核心修复：先判断res是否为非空普通对象，再执行对象操作
+      const isValidObj =
+        typeof res === "object" && res !== null && !Array.isArray(res);
+      console.log(
+        "响应对象属性:",
+        isValidObj ? Object.keys(res) : "res非普通对象（字符串/数组等）"
+      );
+      console.log(
+        "是否有code属性:",
+        isValidObj ? "code" in res : "res非普通对象"
+      );
+      console.log("code值:", isValidObj ? res.code : "res非普通对象");
+      console.log(
+        "是否有message属性:",
+        isValidObj ? "message" in res : "res非普通对象"
+      );
+      console.log("message值:", isValidObj ? res.message : "res非普通对象");
+      console.log(
+        "是否有data属性:",
+        isValidObj ? "data" in res : "res非普通对象"
+      );
+      console.log("是否有id属性:", isValidObj ? "id" in res : "res非普通对象");
+      console.log(
+        "是否有title属性:",
+        isValidObj ? "title" in res : "res非普通对象"
+      );
     } else {
       console.warn("API响应为空或undefined");
     }
 
     console.log("5. 处理API响应...");
-    // 🌟 安全地检查res.code，兼容多种格式
-    if (res && res.code === 1) {
+    // 🌟 兼容修复：支持字符串/对象/空值等多种响应格式
+    let submitSuccess = false;
+    // 场景1：标准对象响应（code=1）
+    if (typeof res === "object" && res !== null && res.code === 1) {
+      submitSuccess = true;
       console.log("✅ 操作成功 (code=1)");
-      emit("submit-success"); // 通知父组件跳转
-    } else if (res && (res.id || res.title)) {
+    }
+    // 场景2：直接返回题目对象（含id/title）
+    else if (typeof res === "object" && res !== null && (res.id || res.title)) {
+      submitSuccess = true;
       console.log("✅ 操作成功 (直接返回题目对象)");
-      emit("submit-success"); // 通知父组件跳转
-    } else if (res && Object.keys(res).length === 0) {
+    }
+    // 场景3：空对象响应
+    else if (
+      typeof res === "object" &&
+      res !== null &&
+      Object.keys(res).length === 0
+    ) {
+      submitSuccess = true;
       console.log("✅ 操作成功 (空对象响应)");
-      emit("submit-success"); // 通知父组件跳转
-    } else if (!res) {
+    }
+    // 场景4：字符串响应（含“成功”关键词）
+    else if (typeof res === "string" && res.includes("成功")) {
+      submitSuccess = true;
+      console.log("✅ 操作成功 (字符串提示成功)");
+    }
+    // 场景5：无响应体
+    else if (!res) {
+      submitSuccess = true;
       console.log("✅ 操作成功 (无响应体)");
+    }
+
+    // 统一处理成功/失败
+    if (submitSuccess) {
       emit("submit-success"); // 通知父组件跳转
     } else {
       console.error("❌ 操作失败");

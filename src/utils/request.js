@@ -3,7 +3,8 @@ import { getToken, removeToken } from "./auth";
 import { ElMessage } from "element-plus";
 // import { request } from "express";
 
-//// 创建axios实例
+// 创建axios实例
+//发送请求时自动带上Token
 const request = axios.create({
   baseURL: process.env.VUE_APP_BASE_API || "/api",
   timeout: 10000,

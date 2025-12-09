@@ -3,7 +3,7 @@ import { getToken, setToken, removeToken } from "@/utils/auth";
 import { login as apiLogin, logout as apiLogout } from "@/api/user";
 import { getUserInfo } from "@/api/user"; // 按需启用
 
-const useMock = true;
+const useMock = false; // 切换模拟或真实接口
 
 const state = {
   token: getToken(),
@@ -204,6 +204,8 @@ const actions = {
   resetToken({ commit }) {
     return new Promise((resolve) => {
       commit("CLEAR_USER");
+      // 新增：清除 localStorage 中的 Token
+      localStorage.removeItem("TOKEN_KEY"); // 注意与 auth.js 中的 TOKEN_KEY 一致
       resolve();
     });
   },

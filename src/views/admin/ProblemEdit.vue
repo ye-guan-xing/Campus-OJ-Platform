@@ -120,7 +120,11 @@ const loadProblemDetail = async () => {
       router.push("/admin/problems");
       return;
     }
-
+    console.log("【加载详情】原始testPointList:", problem.testPointList);
+    console.log(
+      "【加载详情】原始testPointList长度:",
+      problem.testPointList?.length
+    );
     // 数据有效，正常赋值
     problemData.value = {
       ...problem,

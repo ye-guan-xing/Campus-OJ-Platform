@@ -20,7 +20,6 @@ export function register(data) {
 }
 
 //更新
-
 export function updateUserInfo(data) {
   return request({
     url: "/user/info",
@@ -37,6 +36,7 @@ export function logout() {
   });
 }
 
+//获取用户信息
 export function getUserInfo() {
   return request({
     url: `/user/stats`,

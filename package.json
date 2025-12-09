@@ -11,6 +11,7 @@
     "@monaco-editor/loader": "^1.6.1",
     "axios": "^1.13.2",
     "core-js": "^3.8.3",
+    "dompurify": "^3.2.4",
     "element-plus": "^2.11.8",
     "monaco-editor": "^0.54.0",
     "vue": "^3.2.13",
@@ -31,7 +32,7 @@
     "eslint-plugin-vue": "^8.0.3",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
-    "sass": "^1.32.7",
+    "sass": "^1.94.2",
     "sass-loader": "^12.0.0"
   },
   "gitHooks": {

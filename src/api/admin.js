@@ -2,7 +2,7 @@ import request from "@/utils/request";
 import { mockStorage } from "@/utils/mockData";
 
 //启用模拟数据
-const USE_MOCK = true;
+const USE_MOCK = false;
 //模拟延迟
 const mockDelay = (ms = 500) =>
   new Promise((resolve) => setTimeout(resolve, ms));
