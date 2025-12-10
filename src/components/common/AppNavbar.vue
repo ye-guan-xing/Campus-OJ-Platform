@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
-        <router-link to="/" class="brand-link">OJ-Platform</router-link>
+        <router-link to="/" class="brand-link">HG_OJ </router-link>
       </div>
 
       <!-- 主要导航菜单（分普通/管理员） -->
@@ -15,17 +15,10 @@
         >
           题目列表
         </router-link>
-        <router-link
-          to="/submissions"
-          class="navbar-item"
-          active-class="navbar-item-active"
-        >
-          提交记录
-        </router-link>
 
         <!-- 登录后显示的用户导航项 -->
         <template v-if="isLoggedIn">
-          <router-link
+          <!-- <router-link
             to="/user/profile"
             class="navbar-item"
             active-class="navbar-item-active"
@@ -38,7 +31,7 @@
             active-class="navbar-item-active"
           >
             账号设置
-          </router-link>
+          </router-link> -->
 
           <!-- 管理员专属导航项 -->
           <router-link
