@@ -12,6 +12,15 @@ const publicRoutes = [
     },
   },
   {
+    path: "/register",
+    name: "Register",
+    component: () => import("@/views/login/AppRegister.vue"),
+    meta: {
+      title: "注册",
+      requiresGuest: true, // 仅未登录用户可访问
+    },
+  },
+  {
     path: "/",
     component: MainLayout,
     redirect: "/home",

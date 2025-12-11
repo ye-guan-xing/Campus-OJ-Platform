@@ -110,7 +110,7 @@ const handleLogin = async () => {
 };
 
 const handleRegister = () => {
-  ElMessage.info("注册功能开发中...");
+  router.push("/register");
 };
 </script>
 

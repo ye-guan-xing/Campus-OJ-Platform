@@ -81,7 +81,7 @@ const state = {
   // 当前提交结果
   currentSubmission: null,
   // 模拟数据开关 - 改为 false 使用真实API
-  useMock: false,
+  useMock: true,
 };
 
 const mutations = {
