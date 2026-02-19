@@ -7,7 +7,7 @@ import { ElMessage } from "element-plus";
 //发送请求时自动带上Token
 const request = axios.create({
   baseURL: import.meta.env.VUE_APP_BASE_API || '/api',
-  timeout: 10000,
+  timeout: 15000, // 增加超时时间到 15s
   headers: {
     "Content-Type": "application/json;charset=utf-8",
   },

@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue"; // 🌟 移除了不需要的computed
+import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { problemAdminAPI } from "@/api/admin";
@@ -116,14 +116,10 @@ const fetchProblems = async () => {
       problemAdminAPI.getProblemCount(searchKeyword.value.trim()),
     ]);
 
-    console.log("题目列表API返回:", listRes);
-    console.log("题目总数API返回:", countRes);
-    
-
     let dataArray = [];
 
-    // 处理题目列表
-    if (listRes.code === 1 && listRes.data) {
+    // 处理题目列表 - 兼容多种返回结构
+    if (listRes?.code === 1 && listRes.data) {
       if (Array.isArray(listRes.data.list)) {
         dataArray = listRes.data.list;
       } else if (Array.isArray(listRes.data.records)) {
@@ -137,39 +133,24 @@ const fetchProblems = async () => {
 
     problemList.value = dataArray;
 
-    pagination.total = 0;
-    console.log(countRes);
-    console.log("========== 分页调试信息 ==========");
-    console.log("1. 题目总数API返回:", countRes);
-    console.log("2. countRes 类型:", typeof countRes);
-
+    // 处理总数
     if (typeof countRes === 'number') {
       pagination.total = countRes;
-      console.log("3. 从 countRes 设置 total:", pagination.total);
-    } else if (countRes.code === 1 && countRes.data !== undefined) {
+    } else if (countRes?.code === 1 && countRes.data !== undefined) {
       pagination.total = Number(countRes.data);
-      console.log("3. 从 countRes.data 设置 total:", pagination.total);
     } else {
+      // 降级：如果无法获取总数，使用当前列表长度
       pagination.total = dataArray.length;
-      console.log("3. 从当前页数据设置 total:", pagination.total);
     }
-
-    console.log("4. 最终 pagination.total:", pagination.total);
-    console.log("5. pagination.size:", pagination.size);
-    console.log("6. pagination.pageNum:", pagination.pageNum);
-    console.log("7. 计算总页数:", Math.ceil(pagination.total / pagination.size));
-    console.log("===================================");
 
     if (problemList.value.length === 0) {
       if (searchKeyword.value.trim()) {
         ElMessage.info(`未找到包含"${searchKeyword.value}"的题目`);
-      } else {
-        ElMessage.info("暂无题目数据");
       }
     }
   } catch (err) {
     console.error("获取题目列表失败:", err);
-    ElMessage.error(err.message || "网络错误");
+    // request.js 已处理错误提示
     problemList.value = [];
     pagination.total = 0;
   } finally {
@@ -234,27 +215,25 @@ const handleDelete = async (id) => {
   try {
     await ElMessageBox.confirm("确定删除该题目吗？删除后不可恢复。", "提示", {
       type: "warning",
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
     });
 
     const res = await problemAdminAPI.deleteProblem(id);
-    console.log("删除接口返回:", res);
-    console.log("导入的 problemAdminAPI:", problemAdminAPI);
-    console.log("deleteProblem 是否存在:", problemAdminAPI.deleteProblem);
-    console.log("deleteProblem 类型:", typeof problemAdminAPI.deleteProblem);
-    console.log("problemAdminAPI 的所有方法:", Object.keys(problemAdminAPI));
-    // 🌟 兼容多种返回格式
+    
+    // 兼容多种返回格式
     let isSuccess = false;
     let successMessage = "删除成功";
 
     // 情况1：返回 { code: 1, message: "..." }
-    if (res && res.code === 1) {
+    if (res?.code === 1) {
       isSuccess = true;
       successMessage = res.message || "删除成功";
     }
     // 情况2：直接返回空对象（表示成功）
     else if (res && Object.keys(res).length === 0) {
       isSuccess = true;
-      successMessage = "删除成功";
     }
     // 情况3：返回 { success: true } 或其他成功标记
     else if (res && (res.success === true || res.msg === "success")) {
@@ -264,11 +243,14 @@ const handleDelete = async (id) => {
     // 情况4：HTTP状态码200但无响应体
     else if (!res) {
       isSuccess = true;
-      successMessage = "删除成功";
     }
 
     if (isSuccess) {
       ElMessage.success(successMessage);
+      // 如果当前页只有一条数据且不是第一页，删除后向前翻页
+      if (problemList.value.length === 1 && pagination.pageNum > 1) {
+        pagination.pageNum--;
+      }
       fetchProblems(); // 刷新列表
     } else {
       const errorMsg = res?.message || res?.msg || res?.error || "删除失败";

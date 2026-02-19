@@ -3,7 +3,7 @@ import { getToken, setToken, removeToken, getUserInfo as getStoredUserInfo, setU
 import { login as apiLogin, logout as apiLogout } from "@/api/user";
 import { getUserInfo } from "@/api/user"; // 按需启用
 
-const useMock = false; // 切换模拟或真实接口
+// const useMock = false; // 切换模拟或真实接口
 
 const state = {
   token: getToken(),
@@ -33,6 +33,7 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟登录逻辑 ==========
       if (useMock) {
         if (username === "admin" && password === "123456") {
@@ -64,6 +65,7 @@ const actions = {
         }
         return;
       }
+      */
 
       // ========== 真实接口登录逻辑（适配后端返回格式） ==========
       apiLogin({ username, password })
@@ -102,6 +104,7 @@ const actions = {
   // 获取用户信息（通过useMock切换模式）
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟获取用户信息逻辑 ==========
       if (useMock) {
         if (!state.token) {
@@ -133,6 +136,7 @@ const actions = {
         }
         return;
       }
+      */
 
       // ========== 真实接口获取用户信息逻辑（适配后端返回格式） ==========
       // 先判断当前userInfo是否已有roles
@@ -204,12 +208,14 @@ const actions = {
   // 退出登录（通过useMock切换模式）
   logout({ commit }) {
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟退出逻辑 ==========
       if (useMock) {
         commit("CLEAR_USER");
         resolve();
         return;
       }
+      */
 
       // ========== 真实接口退出逻辑 ==========
       apiLogout()

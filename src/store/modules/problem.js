@@ -1,9 +1,9 @@
 // store/modules/problem.js
 import { problemApi } from "@/api/problem";
-import { mockStorage } from "@/utils/mockData"; // 导入模拟数据
+// import { mockStorage } from "@/utils/mockData"; // 导入模拟数据
 
 // 从环境变量读取配置
-const USE_MOCK = false;
+// const USE_MOCK = false;
 
 const state = {
   problems: [],
@@ -55,6 +55,7 @@ const actions = {
   async fetchProblems({ commit, state }, params = {}) {
     commit("SET_LOADING", true);
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据获取题目列表");
         // 使用模拟数据
@@ -80,6 +81,7 @@ const actions = {
           message: "success",
         };
       } else {
+      */
         // 使用真实API
         const response = await problemApi.getProblemList({
           page: state.pagination.page,
@@ -92,7 +94,7 @@ const actions = {
           page: response.data.page,
         });
         return response;
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
@@ -104,6 +106,7 @@ const actions = {
   async fetchProblemDetail({ commit }, id) {
     commit("SET_LOADING", true);
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据获取题目详情:", id);
         // 使用模拟数据
@@ -128,11 +131,12 @@ const actions = {
         commit("SET_CURRENT_PROBLEM", mockResponse.data);
         return mockResponse;
       } else {
+      */
         // 使用真实API
         const response = await problemApi.getProblemDetail(id);
         commit("SET_CURRENT_PROBLEM", response.data);
         return response;
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
@@ -143,6 +147,7 @@ const actions = {
 
   async fetchTags({ commit }) {
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据获取标签");
         // 模拟标签数据
@@ -163,11 +168,12 @@ const actions = {
           message: "success",
         };
       } else {
+      */
         // 使用真实API
         const response = await problemApi.getTags();
         commit("SET_TAGS", response.data);
         return response;
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
@@ -176,6 +182,7 @@ const actions = {
 
   async createProblem({ commit }, problemData) {
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据创建题目");
         // 使用模拟数据
@@ -188,11 +195,12 @@ const actions = {
           message: "success",
         };
       } else {
+      */
         // 使用真实API
         const response = await problemApi.createProblem(problemData);
         commit("ADD_PROBLEM", response.data);
         return response;
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
@@ -201,6 +209,7 @@ const actions = {
 
   async updateProblem({ commit }, { data }) {
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据更新题目:", data.id);
         // 使用模拟数据
@@ -215,11 +224,12 @@ const actions = {
           message: success ? "success" : "更新失败",
         };
       } else {
+      */
         // 使用真实API
         const response = await problemApi.updateProblem(data);
         commit("UPDATE_PROBLEM", response.data);
         return response;
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
@@ -228,6 +238,7 @@ const actions = {
 
   async deleteProblem({ commit }, id) {
     try {
+      /*
       if (USE_MOCK) {
         console.log("使用模拟数据删除题目:", id);
         // 使用模拟数据
@@ -239,10 +250,11 @@ const actions = {
           message: "success",
         };
       } else {
+      */
         // 使用真实API
         await problemApi.deleteProblem(id);
         commit("DELETE_PROBLEM", id);
-      }
+      // }
     } catch (error) {
       commit("SET_ERROR", error.message);
       throw error;
