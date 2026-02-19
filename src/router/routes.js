@@ -44,6 +44,13 @@ const publicRoutes = [
         component: () => import("@/views/problem/ProblemDetailView.vue"),
         meta: { title: "题目详情" },
       },
+      // 评论页面
+      {
+        path: "problems/:id/comments",
+        name: "ProblemComments",
+        component: () => import("@/views/problem/Comment.vue"),
+        meta: { title: "题目评论" },
+      },
       // 需要登录的子路由
       {
         path: "submissions",

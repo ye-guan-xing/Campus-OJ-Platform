@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue"; // 🌟 移除了不需要的computed
+import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { problemAdminAPI } from "@/api/admin";
@@ -88,21 +88,19 @@ import { problemAdminAPI } from "@/api/admin";
 const router = useRouter();
 const loading = ref(false);
 const searchKeyword = ref("");
-const problemList = ref([]); // 存储后端返回的数据（当前页）
+const problemList = ref([]); // 存储当前页显示的数据
 
 // 分页参数
 const pagination = reactive({
   pageNum: 1,
   size: 10,
-  total: 0, // 不再从后端获取，我们自己统计
+  total: 0,
 });
 
-// 🌟 修正：添加onMounted调用
 onMounted(() => {
   fetchProblems();
 });
 
-// 获取题目列表 - 不再关心total
 const fetchProblems = async () => {
   loading.value = true;
   try {
@@ -112,59 +110,47 @@ const fetchProblems = async () => {
       keyword: searchKeyword.value.trim(),
     };
 
-    console.log("请求参数:", params);
+    // 并发请求：获取当前页题目列表和总数
+    const [listRes, countRes] = await Promise.all([
+      problemAdminAPI.getProblemsByPage(params),
+      problemAdminAPI.getProblemCount(searchKeyword.value.trim()),
+    ]);
 
-    const res = await problemAdminAPI.getProblemsByPage(params);
-    console.log("API 返回结果（原始）:", res);
-    console.log("返回数据类型:", typeof res);
-
-    // 🌟 核心修改：后端直接返回数组，我们需要适应这种格式
     let dataArray = [];
 
-    // 情况1：直接返回数组（当前实际情况）
-    if (Array.isArray(res)) {
-      dataArray = res;
-      pagination.total = res.length; // 数组长度就是总数
-      console.log("后端返回数组，长度:", dataArray.length);
-    }
-    // 情况2：返回 { code, data } 格式（Mock格式）
-    else if (res.code === 1) {
-      // 处理各种可能的data格式
-      if (Array.isArray(res.data)) {
-        dataArray = res.data;
-        pagination.total = res.data.length;
-      } else if (res.data && Array.isArray(res.data.list)) {
-        dataArray = res.data.list;
-        pagination.total = res.data.total || res.data.list.length;
-      } else if (res.data && Array.isArray(res.data.records)) {
-        dataArray = res.data.records;
-        pagination.total = res.data.total || res.data.records.length;
+    // 处理题目列表 - 兼容多种返回结构
+    if (listRes?.code === 1 && listRes.data) {
+      if (Array.isArray(listRes.data.list)) {
+        dataArray = listRes.data.list;
+      } else if (Array.isArray(listRes.data.records)) {
+        dataArray = listRes.data.records;
+      } else if (Array.isArray(listRes.data)) {
+        dataArray = listRes.data;
       }
-    }
-    // 情况3：其他格式
-    else {
-      console.warn("未知返回格式，尝试解析:", res);
-      // 尝试当作数组处理
-      dataArray = Array.isArray(res) ? res : [];
-      pagination.total = dataArray.length;
+    } else if (Array.isArray(listRes)) {
+      dataArray = listRes;
     }
 
-    // 🌟 直接使用后端返回的数据
     problemList.value = dataArray;
 
-    console.log("最终数据:", problemList.value);
-    console.log("总条数:", pagination.total);
+    // 处理总数
+    if (typeof countRes === 'number') {
+      pagination.total = countRes;
+    } else if (countRes?.code === 1 && countRes.data !== undefined) {
+      pagination.total = Number(countRes.data);
+    } else {
+      // 降级：如果无法获取总数，使用当前列表长度
+      pagination.total = dataArray.length;
+    }
 
     if (problemList.value.length === 0) {
       if (searchKeyword.value.trim()) {
         ElMessage.info(`未找到包含"${searchKeyword.value}"的题目`);
-      } else {
-        ElMessage.info("暂无题目数据");
       }
     }
   } catch (err) {
     console.error("获取题目列表失败:", err);
-    ElMessage.error(err.message || "网络错误");
+    // request.js 已处理错误提示
     problemList.value = [];
     pagination.total = 0;
   } finally {
@@ -172,35 +158,32 @@ const fetchProblems = async () => {
   }
 };
 
-// 🌟 修正：需要调用fetchProblems
+// 搜索相关函数
 const handleSearchInput = () => {
   pagination.pageNum = 1;
   fetchProblems();
 };
 
-// 🌟 修正：需要调用fetchProblems
 const handleSearch = () => {
   pagination.pageNum = 1;
-  fetchProblems(); // 🌟 添加：搜索按钮点击时重新获取数据
+  fetchProblems();
 };
 
-// 🌟 修正：需要调用fetchProblems
 const handleSearchClear = () => {
   pagination.pageNum = 1;
-  fetchProblems(); // 🌟 添加：清空搜索时重新获取数据
+  fetchProblems();
 };
 
-// 🌟 修正：需要调用fetchProblems
+// 分页相关函数 - 每次翻页都调用后端获取对应页数据
 const handleSizeChange = (size) => {
   pagination.size = size;
   pagination.pageNum = 1;
-  fetchProblems(); // 🌟 添加：分页大小变化时重新获取数据
+  fetchProblems();
 };
 
-// 🌟 修正：需要调用fetchProblems
 const handleCurrentChange = (pageNum) => {
   pagination.pageNum = pageNum;
-  fetchProblems(); // 🌟 添加：页码变化时重新获取数据
+  fetchProblems();
 };
 
 // 跳转到新增题目页
@@ -232,27 +215,25 @@ const handleDelete = async (id) => {
   try {
     await ElMessageBox.confirm("确定删除该题目吗？删除后不可恢复。", "提示", {
       type: "warning",
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
     });
 
     const res = await problemAdminAPI.deleteProblem(id);
-    console.log("删除接口返回:", res);
-    console.log("导入的 problemAdminAPI:", problemAdminAPI);
-    console.log("deleteProblem 是否存在:", problemAdminAPI.deleteProblem);
-    console.log("deleteProblem 类型:", typeof problemAdminAPI.deleteProblem);
-    console.log("problemAdminAPI 的所有方法:", Object.keys(problemAdminAPI));
-    // 🌟 兼容多种返回格式
+    
+    // 兼容多种返回格式
     let isSuccess = false;
     let successMessage = "删除成功";
 
     // 情况1：返回 { code: 1, message: "..." }
-    if (res && res.code === 1) {
+    if (res?.code === 1) {
       isSuccess = true;
       successMessage = res.message || "删除成功";
     }
     // 情况2：直接返回空对象（表示成功）
     else if (res && Object.keys(res).length === 0) {
       isSuccess = true;
-      successMessage = "删除成功";
     }
     // 情况3：返回 { success: true } 或其他成功标记
     else if (res && (res.success === true || res.msg === "success")) {
@@ -262,11 +243,14 @@ const handleDelete = async (id) => {
     // 情况4：HTTP状态码200但无响应体
     else if (!res) {
       isSuccess = true;
-      successMessage = "删除成功";
     }
 
     if (isSuccess) {
       ElMessage.success(successMessage);
+      // 如果当前页只有一条数据且不是第一页，删除后向前翻页
+      if (problemList.value.length === 1 && pagination.pageNum > 1) {
+        pagination.pageNum--;
+      }
       fetchProblems(); // 刷新列表
     } else {
       const errorMsg = res?.message || res?.msg || res?.error || "删除失败";

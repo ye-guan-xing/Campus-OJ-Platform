@@ -7,7 +7,10 @@ import { ElMessage } from "element-plus";
 //发送请求时自动带上Token
 const request = axios.create({
   baseURL: import.meta.env.VUE_APP_BASE_API || '/api',
-  timeout: 10000,
+  timeout: 15000, // 增加超时时间到 15s
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+  },
 });
 
 // 请求拦截器
@@ -30,9 +33,8 @@ request.interceptors.response.use(
   (response) => {
     const res = response.data;
     if (res.code === 1) {
-      return res.data;
+      return res;
     } else {
-      // 业务错误
       ElMessage.error(res.message || "请求失败");
       return Promise.reject(new Error(res.message || "请求失败"));
     }

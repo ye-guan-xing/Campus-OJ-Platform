@@ -104,7 +104,7 @@ const isAdmin = computed(() => {
 
 // 调试打印（适配字符串类型）
 console.log("用户信息：", store.state.user.userInfo);
-console.log("用户角色（字符串）：", store.state.user.userInfo?.roles);
+// console.log("用户角色（字符串）：", store.state.user.userInfo?.roles);
 
 const logout = async () => {
   try {

@@ -1,4 +1,3 @@
-<!-- views/ProblemDetailView.vue -->
 <template>
   <div class="problem-detail-page">
     <div class="page-content">
@@ -43,14 +42,14 @@
           >
             开始答题
           </el-button>
-          <!-- 你可以添加测试API按钮，如果需要的话 -->
+          
           <el-button
-            v-if="false"
-            type="warning"
-            @click="testAPI"
-            style="margin-left: 10px"
+            type="success"
+            v-if="problem.id"
+            @click="goToComments"
+            :icon="ChatLineRound"
           >
-            测试API
+            查看评论
           </el-button>
         </div>
       </div>
@@ -62,7 +61,7 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
-import { ArrowLeft, Edit } from "@element-plus/icons-vue"; // 这两个图标现在会在模板中被使用
+import { ArrowLeft, Edit, ChatLineRound } from "@element-plus/icons-vue";
 import { problemApi } from "@/api/problem";
 import { useStore } from "vuex";
 
@@ -103,18 +102,18 @@ const fetchProblemDetail = async () => {
     ]);
 
     // 处理题目基本信息
-    if (detailRes.code === 1 && detailRes.data) {
+    if (detailRes?.code === 1 && detailRes.data) {
       problem.value = detailRes.data;
-    } else if (detailRes.code === 1 && !detailRes.data) {
+    } else if (detailRes?.code === 1 && !detailRes.data) {
       problem.value = detailRes;
-    } else if (detailRes.id) {
+    } else if (detailRes?.id) {
       problem.value = detailRes;
     } else {
       throw new Error("获取题目详情失败");
     }
 
     // 处理测试点数据
-    if (testPointsRes.code === 1 && Array.isArray(testPointsRes.data)) {
+    if (testPointsRes?.code === 1 && Array.isArray(testPointsRes.data)) {
       testPoints.value = testPointsRes.data;
       // 更新测试点数量
       if (!problem.value.testPointNum) {
@@ -128,7 +127,10 @@ const fetchProblemDetail = async () => {
     }
   } catch (error) {
     console.error("获取题目详情错误:", error);
-    ElMessage.error(error.message || "网络错误，无法加载题目");
+    // request.js 已处理错误提示，此处只处理未被拦截的错误
+    if (!error.message?.includes("题目不存在")) {
+       // 如果是其他未知错误，可以考虑提示，但通常request.js已覆盖
+    }
     goBack();
   } finally {
     loading.value = false;
@@ -136,27 +138,17 @@ const fetchProblemDetail = async () => {
 };
 
 const handleSubmitSuccess = (result) => {
-  console.log("提交成功，接收到结果:", result);
   // 处理不同的结果格式
+  let data = result;
   if (result && typeof result === "object") {
-    // 如果是标准格式 {code: 1, data: {...}}
     if (result.code === 1 && result.data) {
-      submissionResult.value = result.data;
+      data = result.data;
+    } else if (result.id !== undefined || result.questionResultList !== undefined) {
+      data = result;
     }
-    // 如果是直接的数据对象
-    else if (
-      result.id !== undefined ||
-      result.questionResultList !== undefined
-    ) {
-      submissionResult.value = result;
-    }
-    // 其他格式直接赋值
-    else {
-      submissionResult.value = result;
-    }
-  } else {
-    submissionResult.value = result;
   }
+  
+  submissionResult.value = data;
 
   // 确保数据结构正确
   if (submissionResult.value) {
@@ -164,34 +156,30 @@ const handleSubmitSuccess = (result) => {
     if (!submissionResult.value.id) {
       submissionResult.value.id = `temp_${Date.now()}`;
     }
-    // 确保 questionResultList 是数组
-    if (
-      submissionResult.value.questionResultList &&
-      !Array.isArray(submissionResult.value.questionResultList)
-    ) {
-      submissionResult.value.questionResultList = [
-        submissionResult.value.questionResultList,
-      ];
-    }
-    // 如果没有 questionResultList，尝试从其他字段转换
-    if (
-      !submissionResult.value.questionResultList &&
-      submissionResult.value.testPoints
-    ) {
-      submissionResult.value.questionResultList =
-        submissionResult.value.testPoints.map((test) => ({
-          value: test.status === 2 ? "AC" : "WA",
-          message: test.message,
-        }));
+    
+    // 标准化 questionResultList
+    if (!Array.isArray(submissionResult.value.questionResultList)) {
+        if (submissionResult.value.questionResultList) {
+            submissionResult.value.questionResultList = [submissionResult.value.questionResultList];
+        } else if (submissionResult.value.testPoints) {
+            // 尝试从 testPoints 转换
+            submissionResult.value.questionResultList = submissionResult.value.testPoints.map((test) => ({
+                value: test.status === 2 ? "AC" : "WA",
+                message: test.message,
+            }));
+        } else {
+            submissionResult.value.questionResultList = [];
+        }
     }
   }
-  console.log("处理后的判题结果:", submissionResult.value);
+  
   // 显示消息
-  if (submissionResult.value && submissionResult.value.questionResultList) {
+  if (submissionResult.value?.questionResultList) {
+    const totalCount = submissionResult.value.questionResultList.length;
     const passCount = submissionResult.value.questionResultList.filter(
       (item) => item.value === "AC"
     ).length;
-    const totalCount = submissionResult.value.questionResultList.length;
+    
     if (totalCount === 0) {
       ElMessage.warning("暂无判题结果");
     } else if (passCount === totalCount) {
@@ -225,22 +213,9 @@ const scrollToEditor = () => {
   }
 };
 
-// 测试API函数（保留但暂时不显示）
-const testAPI = async () => {
-  console.log("=== 开始API测试 ===");
-  console.log("当前问题ID:", problem.value.id);
-  console.log("当前用户ID:", currentUserId.value);
-
-  try {
-    const { submissionApi } = await import("@/api/submission");
-    console.log("submissionApi 对象:", submissionApi);
-    console.log("submissionApi 方法:", Object.keys(submissionApi));
-
-    ElMessage.info("API测试完成，查看控制台");
-  } catch (error) {
-    console.error("API测试失败:", error);
-    ElMessage.error("API测试失败: " + error.message);
-  }
+// 跳转到评论页面
+const goToComments = () => {
+  router.push(`/problems/${problem.value.id}/comments`);
 };
 
 // 页面加载时获取题目详情
@@ -253,7 +228,6 @@ watch(
   () => route.params.id,
   (newId) => {
     if (newId) {
-      console.log("路由参数变化，重新加载题目:", newId);
       fetchProblemDetail();
       submissionResult.value = null; // 清空之前的判题结果
     }
