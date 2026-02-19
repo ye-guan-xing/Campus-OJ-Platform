@@ -1,0 +1,1607 @@
+{
+  "apifoxProject": "1.0.0",
+  "$schema": {
+    "app": "apifox",
+    "type": "project",
+    "version": "1.2.0"
+  },
+  "info": {
+    "name": "练手",
+    "description": "",
+    "mockRule": {
+      "rules": [],
+      "enableSystemRule": true
+    }
+  },
+  "projectSetting": {
+    "id": "7073391",
+    "auth": {},
+    "securityScheme": {},
+    "gateway": [],
+    "language": "zh-CN",
+    "apiStatuses": [
+      "developing",
+      "testing",
+      "released",
+      "deprecated"
+    ],
+    "mockSettings": {},
+    "preProcessors": [],
+    "postProcessors": [],
+    "advancedSettings": {
+      "enableJsonc": true,
+      "enableBigint": false,
+      "responseValidate": true,
+      "enableTestScenarioSetting": false,
+      "enableYAPICompatScript": false,
+      "isDefaultUrlEncoding": 2,
+      "publishedDocUrlRules": {
+        "defaultRule": "RESOURCE_KEY_ONLY",
+        "resourceKeyStandard": "NEW"
+      }
+    },
+    "initialDisabledMockIds": [],
+    "servers": [
+      {
+        "id": "default",
+        "name": "默认服务",
+        "moduleId": 6094669
+      }
+    ],
+    "cloudMock": {
+      "security": "free",
+      "enable": false,
+      "tokenKey": "apifoxToken"
+    }
+  },
+  "apiCollection": [
+    {
+      "name": "根目录",
+      "id": 65400451,
+      "auth": {},
+      "securityScheme": {},
+      "parentId": 0,
+      "serverId": "",
+      "description": "",
+      "identityPattern": {
+        "httpApi": {
+          "type": "methodAndPath",
+          "bodyType": "",
+          "fields": []
+        }
+      },
+      "shareSettings": {},
+      "visibility": "SHARED",
+      "moduleId": 6094669,
+      "preProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "postProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "inheritPostProcessors": {},
+      "inheritPreProcessors": {},
+      "items": [
+        {
+          "name": "oj平台",
+          "id": 71291888,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 6094669,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "评论系统",
+              "id": 78615448,
+              "auth": {},
+              "securityScheme": {},
+              "parentId": 71291888,
+              "serverId": "",
+              "description": "",
+              "identityPattern": {
+                "httpApi": {
+                  "type": "inherit",
+                  "bodyType": "",
+                  "fields": []
+                }
+              },
+              "shareSettings": {},
+              "visibility": "INHERITED",
+              "moduleId": 6094669,
+              "preProcessors": [
+                {
+                  "id": "inheritProcessors",
+                  "type": "inheritProcessors",
+                  "data": {}
+                }
+              ],
+              "postProcessors": [
+                {
+                  "id": "inheritProcessors",
+                  "type": "inheritProcessors",
+                  "data": {}
+                }
+              ],
+              "inheritPostProcessors": {},
+              "inheritPreProcessors": {},
+              "items": [
+                {
+                  "name": "添加评论",
+                  "api": {
+                    "id": "418727763",
+                    "method": "post",
+                    "path": "/api/comment/addComment",
+                    "parameters": {},
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "136758635",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "null"
+                            },
+                            "01KHT7W5B38PB97MQ0TMNXXMRK": {
+                              "x-tmp-pending-properties": true
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message",
+                            "data",
+                            "01KHT7W5B38PB97MQ0TMNXXMRK"
+                          ],
+                          "x-apifox-orders": [
+                            "code",
+                            "message",
+                            "data",
+                            "01KHT7W5B38PB97MQ0TMNXXMRK"
+                          ]
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [
+                      {
+                        "name": "成功示例",
+                        "data": "{\r\n    \"code\": 1,\r\n    \"message\": \"success\",\r\n    \"data\": null\r\n}",
+                        "responseId": 136758635
+                      }
+                    ],
+                    "requestBody": {
+                      "type": "application/json",
+                      "parameters": [],
+                      "jsonSchema": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "integer"
+                          },
+                          "content": {
+                            "type": "string"
+                          },
+                          "parentCommentId": {
+                            "type": "null"
+                          },
+                          "questionId": {
+                            "type": "integer"
+                          },
+                          "01KHNJFCK7NY5QC54BY031R2E4": {
+                            "x-tmp-pending-properties": true
+                          }
+                        },
+                        "required": [
+                          "userId",
+                          "content",
+                          "parentCommentId",
+                          "questionId",
+                          "01KHNJFCK7NY5QC54BY031R2E4"
+                        ],
+                        "x-apifox-orders": [
+                          "userId",
+                          "content",
+                          "parentCommentId",
+                          "questionId",
+                          "01KHNJFCK7NY5QC54BY031R2E4"
+                        ]
+                      },
+                      "mediaType": "",
+                      "examples": [
+                        {
+                          "mediaType": "application/json",
+                          "value": "{\r\n  \"userId\": 1001,\r\n  \"content\": \"这个解法太巧妙了，我之前怎么没想到！\",\r\n  \"parentCommentId\": null,\r\n  \"questionId\": 2048\r\n}",
+                          "name": "示例 1"
+                        }
+                      ],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 10,
+                    "cases": [
+                      {
+                        "id": 347460548,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "136758635",
+                        "parameters": {
+                          "query": [],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "KbkvOc2GAE",
+                              "name": "token",
+                              "value": "",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "data": "{\r\n  \"userId\": 1,\r\n  \"content\": \"这个解法太巧妙了，我之前怎么没想到！\",\r\n  \"parentCommentId\": null,\r\n  \"questionId\": 48\r\n}",
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": null,
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                },
+                {
+                  "name": "点赞",
+                  "api": {
+                    "id": "418727781",
+                    "method": "post",
+                    "path": "/api/comment/addCommentLike",
+                    "parameters": {
+                      "query": []
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "133655972",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {}
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [],
+                    "requestBody": {
+                      "type": "application/json",
+                      "parameters": [],
+                      "jsonSchema": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "integer"
+                          },
+                          "commentId": {
+                            "type": "integer"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "userId",
+                          "commentId"
+                        ],
+                        "required": [
+                          "userId",
+                          "commentId"
+                        ]
+                      },
+                      "mediaType": "",
+                      "examples": [],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 20,
+                    "cases": [
+                      {
+                        "id": 347464223,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "133655972",
+                        "parameters": {
+                          "query": [],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "ci1I1zLBs7",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "data": "{\n    \"userId\": 1,\n    \"commentId\": 2\n}",
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.7033db5b-168c-4eeb-bbcf-d3c0bb26c671\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"7033db5b-168c-4eeb-bbcf-d3c0bb26c671\",\"requestIndex\":0,\"httpRequestId\":\"a5f1917d-6ac2-46c3-a55a-3ded216a89b5\"},\"type\":\"http\",\"response\":{\"id\":\"ec0a95a8-982c-4a6b-ad2d-d12ac1acd082\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 13:01:51 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,110,117,108,108,125]},\"cookie\":[],\"responseTime\":13,\"responseSize\":42,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.3840999975800514,\"wait\":0.190700002014637,\"dns\":0,\"tcp\":0,\"firstByte\":11.86379999667406,\"download\":0.5498000010848045,\"process\":0.03880000114440918,\"total\":13.027199998497963}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"addCommentLike\"],\"host\":[\"localhost\"],\"query\":[],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true},{\"key\":\"Content-Length\",\"value\":39,\"system\":true}],\"method\":\"POST\",\"baseUrl\":\"http://localhost:8080\",\"body\":{\"mode\":\"raw\",\"raw\":\"{\\n    \\\"userId\\\": 1,\\n    \\\"commentId\\\": 2\\n}\",\"generateMode\":\"normal\",\"type\":\"application/json\"},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"POST\",\"href\":\"http://localhost:8080/api/comment/addCommentLike\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"Content-Length\",\"value\":\"39\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 13:01:51 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771333311882,\"requestStart\":1771333311883,\"offset\":{\"request\":0.3840999975800514,\"socket\":0.5747999995946884,\"response\":12.43859999626875,\"end\":12.988399997353554,\"lookup\":0.5747999995946884,\"connect\":0.5747999995946884,\"done\":13.027199998497963}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771333311853,\"preProcessorsStarted\":1771333311854,\"preProcessorsCompleted\":1771333311854,\"postProcessorsStarted\":1771333311897,\"postProcessorsCompleted\":1771333311897,\"completed\":1771333311898},\"metaInfo\":{\"httpApiId\":418727781,\"httpApiCaseId\":0,\"httpApiName\":\"点赞\",\"httpApiPath\":\"/api/comment/addCommentLike\",\"httpApiMethod\":\"post\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                },
+                {
+                  "name": "查询评论",
+                  "api": {
+                    "id": "418728941",
+                    "method": "get",
+                    "path": "/api/comment/getComment",
+                    "parameters": {
+                      "query": [
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "8EET8lX8vQ",
+                          "enable": true,
+                          "name": "commentId",
+                          "schema": {
+                            "type": "integer"
+                          }
+                        },
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "string",
+                          "id": "OcIu71Kzvd",
+                          "enable": true,
+                          "name": "userId"
+                        }
+                      ]
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "110745641",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "userId": {
+                                  "type": "integer"
+                                },
+                                "userName": {
+                                  "type": "string"
+                                },
+                                "content": {
+                                  "type": "string"
+                                },
+                                "parentCommentId": {
+                                  "type": "null"
+                                },
+                                "questionId": {
+                                  "type": "integer"
+                                },
+                                "likeCount": {
+                                  "type": "integer"
+                                },
+                                "isLiked": {
+                                  "type": "boolean"
+                                },
+                                "childComments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "userId": {
+                                        "type": "integer"
+                                      },
+                                      "userName": {
+                                        "type": "string"
+                                      },
+                                      "content": {
+                                        "type": "string"
+                                      },
+                                      "parentCommentId": {
+                                        "type": "integer"
+                                      },
+                                      "questionId": {
+                                        "type": "integer"
+                                      },
+                                      "likeCount": {
+                                        "type": "integer"
+                                      },
+                                      "isLiked": {
+                                        "type": "boolean"
+                                      },
+                                      "childComments": {
+                                        "type": "null"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "userId",
+                                      "userName",
+                                      "content",
+                                      "parentCommentId",
+                                      "questionId",
+                                      "likeCount",
+                                      "isLiked",
+                                      "childComments"
+                                    ],
+                                    "x-apifox-orders": [
+                                      "id",
+                                      "userId",
+                                      "userName",
+                                      "content",
+                                      "parentCommentId",
+                                      "questionId",
+                                      "likeCount",
+                                      "isLiked",
+                                      "childComments"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "userId",
+                                "userName",
+                                "content",
+                                "parentCommentId",
+                                "questionId",
+                                "likeCount",
+                                "isLiked",
+                                "childComments"
+                              ],
+                              "x-apifox-orders": [
+                                "id",
+                                "userId",
+                                "userName",
+                                "content",
+                                "parentCommentId",
+                                "questionId",
+                                "likeCount",
+                                "isLiked",
+                                "childComments"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message",
+                            "data"
+                          ],
+                          "x-apifox-orders": [
+                            "code",
+                            "message",
+                            "data"
+                          ]
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [
+                      {
+                        "name": "成功示例",
+                        "data": "{\r\n    \"code\": 1,\r\n    \"message\": \"success\",\r\n    \"data\": {\r\n        \"id\": 2,\r\n        \"userId\": 1,\r\n        \"userName\": \"admin\",\r\n        \"content\": \"这个解法太巧妙了，我之前怎么没想到！\",\r\n        \"parentCommentId\": null,\r\n        \"questionId\": 48,\r\n        \"likeCount\": 1,\r\n        \"isLiked\": true,\r\n        \"childComments\": [\r\n            {\r\n                \"id\": 4,\r\n                \"userId\": 1,\r\n                \"userName\": \"admin\",\r\n                \"content\": \"主播复活\",\r\n                \"parentCommentId\": 2,\r\n                \"questionId\": 48,\r\n                \"likeCount\": 0,\r\n                \"isLiked\": false,\r\n                \"childComments\": null\r\n            },\r\n            {\r\n                \"id\": 5,\r\n                \"userId\": 1,\r\n                \"userName\": \"admin\",\r\n                \"content\": \"test\",\r\n                \"parentCommentId\": 2,\r\n                \"questionId\": 48,\r\n                \"likeCount\": 0,\r\n                \"isLiked\": false,\r\n                \"childComments\": null\r\n            },\r\n            {\r\n                \"id\": 6,\r\n                \"userId\": 1,\r\n                \"userName\": \"admin\",\r\n                \"content\": \"一定要使用\",\r\n                \"parentCommentId\": 2,\r\n                \"questionId\": 48,\r\n                \"likeCount\": 1,\r\n                \"isLiked\": true,\r\n                \"childComments\": null\r\n            },\r\n            {\r\n                \"id\": 7,\r\n                \"userId\": 1,\r\n                \"userName\": \"admin\",\r\n                \"content\": \"测试一下\",\r\n                \"parentCommentId\": 2,\r\n                \"questionId\": 48,\r\n                \"likeCount\": 0,\r\n                \"isLiked\": false,\r\n                \"childComments\": null\r\n            },\r\n            {\r\n                \"id\": 11,\r\n                \"userId\": 11,\r\n                \"userName\": \"xiaoming\",\r\n                \"content\": \"复活\",\r\n                \"parentCommentId\": 4,\r\n                \"questionId\": 48,\r\n                \"likeCount\": 0,\r\n                \"isLiked\": false,\r\n                \"childComments\": null\r\n            }\r\n        ]\r\n    }\r\n}",
+                        "responseId": 110745641
+                      }
+                    ],
+                    "requestBody": {
+                      "type": "none",
+                      "parameters": [],
+                      "mediaType": "",
+                      "examples": [],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 30,
+                    "cases": [
+                      {
+                        "id": 347464222,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "110745641",
+                        "parameters": {
+                          "query": [
+                            {
+                              "id": "y46kFEQyyS",
+                              "relatedId": "8EET8lX8vQ",
+                              "value": "2",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "commentId"
+                            }
+                          ],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "4H2di6fV1w",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.2a82ef82-f00c-4d0e-b851-3f003f7ba904\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"2a82ef82-f00c-4d0e-b851-3f003f7ba904\",\"requestIndex\":0,\"httpRequestId\":\"43354bc3-36b2-415e-9f40-7fdebc783276\"},\"type\":\"http\",\"response\":{\"id\":\"7df17fdc-4f7a-4762-841a-23754a228d40\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 12:46:42 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,123,34,105,100,34,58,50,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,232,191,153,228,184,170,232,167,163,230,179,149,229,164,170,229,183,167,229,166,153,228,186,134,239,188,140,230,136,145,228,185,139,229,137,141,230,128,142,228,185,136,230,178,161,230,131,179,229,136,176,239,188,129,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,110,117,108,108,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,110,117,108,108,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,91,123,34,105,100,34,58,52,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,187,230,146,173,229,164,141,230,180,187,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,110,117,108,108,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,53,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,116,101,115,116,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,110,117,108,108,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,54,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,128,229,174,154,232,166,129,228,189,191,231,148,168,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,110,117,108,108,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,93,125,125]},\"cookie\":[],\"responseTime\":962,\"responseSize\":674,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.6228000000119209,\"wait\":1.227000005543232,\"dns\":0.14350000023841858,\"tcp\":0.3196999952197075,\"firstByte\":958.973600000143,\"download\":1.1750999987125397,\"process\":0.05290000140666962,\"total\":962.5146000012755}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"getComment\"],\"host\":[\"localhost\"],\"query\":[{\"key\":\"commentId\",\"value\":\"2\"}],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true}],\"method\":\"GET\",\"baseUrl\":\"http://localhost:8080\",\"body\":{},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"GET\",\"href\":\"http://localhost:8080/api/comment/getComment?commentId=2\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 12:46:42 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771332401594,\"requestStart\":1771332401595,\"offset\":{\"request\":0.6228000000119209,\"socket\":1.849800005555153,\"lookup\":1.9933000057935715,\"connect\":2.313000001013279,\"response\":961.2866000011563,\"end\":962.4616999998689,\"done\":962.5146000012755}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771332401545,\"preProcessorsStarted\":1771332401548,\"preProcessorsCompleted\":1771332401548,\"postProcessorsStarted\":1771332402559,\"postProcessorsCompleted\":1771332402559,\"completed\":1771332402560},\"metaInfo\":{\"httpApiId\":418728941,\"httpApiCaseId\":0,\"httpApiName\":\"查询评论\",\"httpApiPath\":\"/api/comment/getComment\",\"httpApiMethod\":\"get\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      },
+                      {
+                        "id": 347490608,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "110745641",
+                        "parameters": {
+                          "query": [
+                            {
+                              "id": "EWgpZYOU7l",
+                              "relatedId": "8EET8lX8vQ",
+                              "value": "2",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "commentId"
+                            },
+                            {
+                              "id": "Z0KqYf0WNS",
+                              "relatedId": "OcIu71Kzvd",
+                              "value": "1",
+                              "type": "integer",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "userId"
+                            }
+                          ],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "KanOdUUb0Y",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.aa09c0f3-0412-4137-9064-2fe4fa1a2479\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"aa09c0f3-0412-4137-9064-2fe4fa1a2479\",\"requestIndex\":0,\"httpRequestId\":\"1a456959-b9f2-4320-9ec6-6240890ad900\"},\"type\":\"http\",\"response\":{\"id\":\"2a2ddee0-3eb9-44a1-a5bd-2bd1dea906a4\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Thu, 19 Feb 2026 06:16:15 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,123,34,105,100,34,58,50,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,232,191,153,228,184,170,232,167,163,230,179,149,229,164,170,229,183,167,229,166,153,228,186,134,239,188,140,230,136,145,228,185,139,229,137,141,230,128,142,228,185,136,230,178,161,230,131,179,229,136,176,239,188,129,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,110,117,108,108,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,49,44,34,105,115,76,105,107,101,100,34,58,116,114,117,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,91,123,34,105,100,34,58,52,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,187,230,146,173,229,164,141,230,180,187,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,53,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,116,101,115,116,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,54,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,128,229,174,154,232,166,129,228,189,191,231,148,168,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,49,44,34,105,115,76,105,107,101,100,34,58,116,114,117,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,55,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,230,181,139,232,175,149,228,184,128,228,184,139,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,49,49,44,34,117,115,101,114,73,100,34,58,49,49,44,34,117,115,101,114,78,97,109,101,34,58,34,120,105,97,111,109,105,110,103,34,44,34,99,111,110,116,101,110,116,34,58,34,229,164,141,230,180,187,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,52,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,93,125,125]},\"cookie\":[],\"responseTime\":35,\"responseSize\":977,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.3084000004455447,\"wait\":0.5445999996736646,\"dns\":0.19240000005811453,\"tcp\":0.4358000000938773,\"firstByte\":32.43919999990612,\"download\":0.4528999999165535,\"process\":0.03140000067651272,\"total\":34.40470000077039}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"getComment\"],\"host\":[\"localhost\"],\"query\":[{\"key\":\"commentId\",\"value\":\"2\"},{\"key\":\"userId\",\"value\":\"1\"}],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true}],\"method\":\"GET\",\"baseUrl\":\"http://localhost:8080\",\"body\":{},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"GET\",\"href\":\"http://localhost:8080/api/comment/getComment?commentId=2&userId=1\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Thu, 19 Feb 2026 06:16:15 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771481775238,\"requestStart\":1771481775239,\"offset\":{\"request\":0.3084000004455447,\"socket\":0.8530000001192093,\"lookup\":1.0454000001773238,\"connect\":1.4812000002712011,\"response\":33.920400000177324,\"end\":34.37330000009388,\"done\":34.40470000077039}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771481775232,\"preProcessorsStarted\":1771481775236,\"preProcessorsCompleted\":1771481775236,\"postProcessorsStarted\":1771481775273,\"postProcessorsCompleted\":1771481775273,\"completed\":1771481775274},\"metaInfo\":{\"httpApiId\":418728941,\"httpApiCaseId\":0,\"httpApiName\":\"查询评论\",\"httpApiPath\":\"/api/comment/getComment\",\"httpApiMethod\":\"get\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                },
+                {
+                  "name": "取消点赞",
+                  "api": {
+                    "id": "418729655",
+                    "method": "delete",
+                    "path": "/api/comment/cancelCommentLike",
+                    "parameters": {},
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "166260806",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {}
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [],
+                    "requestBody": {
+                      "type": "application/json",
+                      "parameters": [],
+                      "jsonSchema": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "string"
+                          },
+                          "commentId": {
+                            "type": "string"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "userId",
+                          "commentId"
+                        ],
+                        "required": [
+                          "userId",
+                          "commentId"
+                        ]
+                      },
+                      "mediaType": "",
+                      "examples": [],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 40,
+                    "cases": [
+                      {
+                        "id": 347464221,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "166260806",
+                        "parameters": {
+                          "query": [],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "fRHB9k9zhK",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "data": "{\n    \"userId\": 1,\n    \"commentId\": 2\n}",
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.4bb7983d-3128-4375-914a-9984ce72c4d3\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"4bb7983d-3128-4375-914a-9984ce72c4d3\",\"requestIndex\":0,\"httpRequestId\":\"c67bb72c-6f64-41af-bb39-6f95712dab97\"},\"type\":\"http\",\"response\":{\"id\":\"c27e7066-f825-47d0-9efe-9f64cffc5ba0\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 13:11:00 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,110,117,108,108,125]},\"cookie\":[],\"responseTime\":946,\"responseSize\":42,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.34789999574422836,\"wait\":0.6797000020742416,\"dns\":0.3896000012755394,\"tcp\":0.4002000018954277,\"firstByte\":942.8769999966025,\"download\":0.7963000014424324,\"process\":0.030900001525878906,\"total\":945.5216000005603}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"cancelCommentLike\"],\"host\":[\"localhost\"],\"query\":[],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true},{\"key\":\"Content-Length\",\"value\":39,\"system\":true}],\"method\":\"DELETE\",\"baseUrl\":\"http://localhost:8080\",\"body\":{\"mode\":\"raw\",\"raw\":\"{\\n    \\\"userId\\\": 1,\\n    \\\"commentId\\\": 2\\n}\",\"generateMode\":\"normal\",\"type\":\"application/json\"},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"DELETE\",\"href\":\"http://localhost:8080/api/comment/cancelCommentLike\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"Content-Length\",\"value\":\"39\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Tue, 17 Feb 2026 13:11:00 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771333859139,\"requestStart\":1771333859140,\"offset\":{\"request\":0.34789999574422836,\"socket\":1.02759999781847,\"lookup\":1.4171999990940094,\"connect\":1.817400000989437,\"response\":944.694399997592,\"end\":945.4906999990344,\"done\":945.5216000005603}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771333859093,\"preProcessorsStarted\":1771333859109,\"preProcessorsCompleted\":1771333859109,\"postProcessorsStarted\":1771333860088,\"postProcessorsCompleted\":1771333860088,\"completed\":1771333860089},\"metaInfo\":{\"httpApiId\":418729655,\"httpApiCaseId\":0,\"httpApiName\":\"取消点赞\",\"httpApiPath\":\"/api/comment/cancelCommentLike\",\"httpApiMethod\":\"delete\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                },
+                {
+                  "name": "根据题目id分页查询评论",
+                  "api": {
+                    "id": "418730686",
+                    "method": "get",
+                    "path": "/api/comment/getComments",
+                    "parameters": {
+                      "query": [
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "8EET8lX8vQ",
+                          "enable": true,
+                          "name": "questionId",
+                          "schema": {
+                            "type": "integer"
+                          }
+                        },
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "Lr1LYdOvlP",
+                          "enable": true,
+                          "name": "pageNum"
+                        },
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "GZrEbeC1U1",
+                          "enable": true,
+                          "name": "pageSize",
+                          "schema": {
+                            "type": "integer"
+                          }
+                        },
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "ULPnVPfesY",
+                          "enable": true,
+                          "name": "userId",
+                          "schema": {
+                            "type": "integer"
+                          }
+                        }
+                      ]
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "110745641",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "userId": {
+                                    "type": "integer"
+                                  },
+                                  "userName": {
+                                    "type": "string"
+                                  },
+                                  "content": {
+                                    "type": "string"
+                                  },
+                                  "parentCommentId": {
+                                    "type": "null"
+                                  },
+                                  "questionId": {
+                                    "type": "integer"
+                                  },
+                                  "likeCount": {
+                                    "type": "integer"
+                                  },
+                                  "isLiked": {
+                                    "type": "boolean"
+                                  },
+                                  "childComments": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer"
+                                        },
+                                        "userId": {
+                                          "type": "integer"
+                                        },
+                                        "userName": {
+                                          "type": "string"
+                                        },
+                                        "content": {
+                                          "type": "string"
+                                        },
+                                        "parentCommentId": {
+                                          "type": "integer"
+                                        },
+                                        "questionId": {
+                                          "type": "integer"
+                                        },
+                                        "likeCount": {
+                                          "type": "integer"
+                                        },
+                                        "isLiked": {
+                                          "type": "boolean"
+                                        },
+                                        "childComments": {
+                                          "type": "null"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "userId",
+                                        "userName",
+                                        "content",
+                                        "parentCommentId",
+                                        "questionId",
+                                        "likeCount",
+                                        "isLiked",
+                                        "childComments"
+                                      ],
+                                      "x-apifox-orders": [
+                                        "id",
+                                        "userId",
+                                        "userName",
+                                        "content",
+                                        "parentCommentId",
+                                        "questionId",
+                                        "likeCount",
+                                        "isLiked",
+                                        "childComments"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "userId",
+                                  "userName",
+                                  "content",
+                                  "parentCommentId",
+                                  "questionId",
+                                  "likeCount",
+                                  "isLiked",
+                                  "childComments"
+                                ],
+                                "x-apifox-orders": [
+                                  "id",
+                                  "userId",
+                                  "userName",
+                                  "content",
+                                  "parentCommentId",
+                                  "questionId",
+                                  "likeCount",
+                                  "isLiked",
+                                  "childComments"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message",
+                            "data"
+                          ],
+                          "x-apifox-orders": [
+                            "code",
+                            "message",
+                            "data"
+                          ]
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [
+                      {
+                        "name": "成功示例",
+                        "data": "{\r\n    \"code\": 1,\r\n    \"message\": \"success\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 3,\r\n            \"userId\": 1,\r\n            \"userName\": \"admin\",\r\n            \"content\": \"11111！\",\r\n            \"parentCommentId\": null,\r\n            \"questionId\": 48,\r\n            \"likeCount\": 0,\r\n            \"isLiked\": false,\r\n            \"childComments\": null\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"userId\": 1,\r\n            \"userName\": \"admin\",\r\n            \"content\": \"这个解法太巧妙了，我之前怎么没想到！\",\r\n            \"parentCommentId\": null,\r\n            \"questionId\": 48,\r\n            \"likeCount\": 1,\r\n            \"isLiked\": true,\r\n            \"childComments\": [\r\n                {\r\n                    \"id\": 4,\r\n                    \"userId\": 1,\r\n                    \"userName\": \"admin\",\r\n                    \"content\": \"主播复活\",\r\n                    \"parentCommentId\": 2,\r\n                    \"questionId\": 48,\r\n                    \"likeCount\": 0,\r\n                    \"isLiked\": false,\r\n                    \"childComments\": null\r\n                },\r\n                {\r\n                    \"id\": 5,\r\n                    \"userId\": 1,\r\n                    \"userName\": \"admin\",\r\n                    \"content\": \"test\",\r\n                    \"parentCommentId\": 2,\r\n                    \"questionId\": 48,\r\n                    \"likeCount\": 0,\r\n                    \"isLiked\": false,\r\n                    \"childComments\": null\r\n                },\r\n                {\r\n                    \"id\": 6,\r\n                    \"userId\": 1,\r\n                    \"userName\": \"admin\",\r\n                    \"content\": \"一定要使用\",\r\n                    \"parentCommentId\": 2,\r\n                    \"questionId\": 48,\r\n                    \"likeCount\": 0,\r\n                    \"isLiked\": false,\r\n                    \"childComments\": null\r\n                },\r\n                {\r\n                    \"id\": 7,\r\n                    \"userId\": 1,\r\n                    \"userName\": \"admin\",\r\n                    \"content\": \"测试一下\",\r\n                    \"parentCommentId\": 2,\r\n                    \"questionId\": 48,\r\n                    \"likeCount\": 0,\r\n                    \"isLiked\": false,\r\n                    \"childComments\": null\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+                        "responseId": 110745641
+                      }
+                    ],
+                    "requestBody": {
+                      "type": "none",
+                      "parameters": [],
+                      "mediaType": "",
+                      "examples": [],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 35,
+                    "cases": [
+                      {
+                        "id": 347489423,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "110745641",
+                        "parameters": {
+                          "query": [
+                            {
+                              "id": "xiVyRJryuM",
+                              "relatedId": "8EET8lX8vQ",
+                              "relatedName": "questionId",
+                              "value": "48",
+                              "enable": true,
+                              "isDelete": false
+                            },
+                            {
+                              "id": "Ez1YKWrTyS",
+                              "relatedId": "Lr1LYdOvlP",
+                              "relatedName": "pageNum",
+                              "value": "1",
+                              "enable": true,
+                              "isDelete": false
+                            },
+                            {
+                              "id": "QloJHmakg6",
+                              "relatedId": "GZrEbeC1U1",
+                              "relatedName": "pageSize",
+                              "value": "10",
+                              "enable": true,
+                              "isDelete": false
+                            },
+                            {
+                              "id": "Eut1KiYpGD",
+                              "relatedId": "ULPnVPfesY",
+                              "value": "1",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "userId"
+                            }
+                          ],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "l92QqPs6tf",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.f7771d07-4bec-437a-9487-3211922033e1\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"f7771d07-4bec-437a-9487-3211922033e1\",\"requestIndex\":0,\"httpRequestId\":\"bc60849b-a559-45a7-af29-b7f33579a618\"},\"type\":\"http\",\"response\":{\"id\":\"f1a26107-3b63-4cbc-ac69-b6354d439598\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Thu, 19 Feb 2026 06:01:00 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,91,123,34,105,100,34,58,51,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,49,49,49,49,49,239,188,129,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,110,117,108,108,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,50,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,232,191,153,228,184,170,232,167,163,230,179,149,229,164,170,229,183,167,229,166,153,228,186,134,239,188,140,230,136,145,228,185,139,229,137,141,230,128,142,228,185,136,230,178,161,230,131,179,229,136,176,239,188,129,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,110,117,108,108,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,49,44,34,105,115,76,105,107,101,100,34,58,116,114,117,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,91,123,34,105,100,34,58,52,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,187,230,146,173,229,164,141,230,180,187,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,53,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,116,101,115,116,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,54,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,228,184,128,229,174,154,232,166,129,228,189,191,231,148,168,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,44,123,34,105,100,34,58,55,44,34,117,115,101,114,73,100,34,58,49,44,34,117,115,101,114,78,97,109,101,34,58,34,97,100,109,105,110,34,44,34,99,111,110,116,101,110,116,34,58,34,230,181,139,232,175,149,228,184,128,228,184,139,34,44,34,112,97,114,101,110,116,67,111,109,109,101,110,116,73,100,34,58,50,44,34,113,117,101,115,116,105,111,110,73,100,34,58,52,56,44,34,108,105,107,101,67,111,117,110,116,34,58,48,44,34,105,115,76,105,107,101,100,34,58,102,97,108,115,101,44,34,99,104,105,108,100,67,111,109,109,101,110,116,115,34,58,110,117,108,108,125,93,125,93,125]},\"cookie\":[],\"responseTime\":836,\"responseSize\":980,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.8161000004038215,\"wait\":1.6302999993786216,\"dns\":0.351800000295043,\"tcp\":0.42410000041127205,\"firstByte\":831.5418999996036,\"download\":1.1366999996826053,\"process\":0.07580000068992376,\"total\":835.9767000004649}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"getComments\"],\"host\":[\"localhost\"],\"query\":[{\"key\":\"questionId\",\"value\":\"48\"},{\"key\":\"pageNum\",\"value\":\"1\"},{\"key\":\"pageSize\",\"value\":\"10\"},{\"key\":\"userId\",\"value\":\"1\"}],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true}],\"method\":\"GET\",\"baseUrl\":\"http://localhost:8080\",\"body\":{},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"GET\",\"href\":\"http://localhost:8080/api/comment/getComments?questionId=48&pageNum=1&pageSize=10&userId=1\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Thu, 19 Feb 2026 06:01:00 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771480859604,\"requestStart\":1771480859605,\"offset\":{\"request\":0.8161000004038215,\"socket\":2.446399999782443,\"lookup\":2.798200000077486,\"connect\":3.222300000488758,\"response\":834.7642000000924,\"end\":835.900899999775,\"done\":835.9767000004649}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771480859558,\"preProcessorsStarted\":1771480859558,\"preProcessorsCompleted\":1771480859558,\"postProcessorsStarted\":1771480860442,\"postProcessorsCompleted\":1771480860442,\"completed\":1771480860443},\"metaInfo\":{\"httpApiId\":418730686,\"httpApiCaseId\":347488907,\"httpApiName\":\"根据题目id分页查询评论\",\"httpApiPath\":\"/api/comment/getComments\",\"httpApiMethod\":\"get\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                },
+                {
+                  "name": "删除评论",
+                  "api": {
+                    "id": "418758003",
+                    "method": "delete",
+                    "path": "/api/comment/deleteComment",
+                    "parameters": {
+                      "query": [
+                        {
+                          "required": false,
+                          "description": "",
+                          "type": "integer",
+                          "id": "kbHuHjPnFs",
+                          "enable": true,
+                          "name": "id",
+                          "schema": {
+                            "type": "integer"
+                          }
+                        }
+                      ]
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "responses": [
+                      {
+                        "id": "137427910",
+                        "code": 200,
+                        "name": "成功",
+                        "headers": [],
+                        "jsonSchema": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message",
+                            "data"
+                          ],
+                          "x-apifox-orders": [
+                            "code",
+                            "message",
+                            "data"
+                          ]
+                        },
+                        "itemSchema": {},
+                        "description": "",
+                        "contentType": "json",
+                        "mediaType": ""
+                      }
+                    ],
+                    "responseExamples": [
+                      {
+                        "name": "成功示例",
+                        "data": "{\r\n    \"code\": 1,\r\n    \"message\": \"success\",\r\n    \"data\": null\r\n}",
+                        "responseId": 137427910
+                      }
+                    ],
+                    "requestBody": {
+                      "type": "none",
+                      "parameters": [],
+                      "mediaType": "",
+                      "examples": [],
+                      "oasExtensions": ""
+                    },
+                    "description": "",
+                    "tags": [],
+                    "status": "developing",
+                    "serverId": "",
+                    "operationId": "",
+                    "sourceUrl": "",
+                    "ordering": 50,
+                    "cases": [
+                      {
+                        "id": 347482971,
+                        "type": "DEBUG_CASE",
+                        "path": null,
+                        "name": "成功",
+                        "responseId": "137427910",
+                        "parameters": {
+                          "query": [
+                            {
+                              "id": "CC8j4SseCN",
+                              "relatedId": "kbHuHjPnFs",
+                              "value": "8",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "id"
+                            }
+                          ],
+                          "path": [],
+                          "cookie": [],
+                          "header": [
+                            {
+                              "id": "rtGvPOXJOu",
+                              "name": "token",
+                              "value": "a66abb5684c45962d887564f08346e8d",
+                              "type": "string",
+                              "description": "",
+                              "enable": true,
+                              "isDelete": false,
+                              "relatedName": "token"
+                            }
+                          ]
+                        },
+                        "commonParameters": {
+                          "query": [],
+                          "body": [],
+                          "header": [],
+                          "cookie": []
+                        },
+                        "requestBody": {
+                          "parameters": [],
+                          "generateMode": "normal"
+                        },
+                        "auth": {},
+                        "securityScheme": {},
+                        "advancedSettings": {
+                          "disabledSystemHeaders": {}
+                        },
+                        "requestResult": "{\"id\":\"temp.877d13e0-84c7-4b90-8d3b-3ed486eb11df\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"877d13e0-84c7-4b90-8d3b-3ed486eb11df\",\"requestIndex\":0,\"httpRequestId\":\"a23e2aef-e369-4da2-89e9-4dc50e6f8402\"},\"type\":\"http\",\"response\":{\"id\":\"3b031142-7088-46a1-a24f-6d128bbe86b1\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Wed, 18 Feb 2026 13:36:06 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,99,111,100,101,34,58,49,44,34,109,101,115,115,97,103,101,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,110,117,108,108,125]},\"cookie\":[],\"responseTime\":7065,\"responseSize\":42,\"type\":\"http\",\"tempFilePath\":\"\",\"timingPhases\":{\"prepare\":0.4065000005066395,\"wait\":0.7428999990224838,\"dns\":0.2133999988436699,\"tcp\":0.5177999995648861,\"firstByte\":7059.299200002104,\"download\":3.258499998599291,\"process\":0.11989999935030937,\"total\":7064.558199997991}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"8080\",\"path\":[\"api\",\"comment\",\"deleteComment\"],\"host\":[\"localhost\"],\"query\":[{\"key\":\"id\",\"value\":\"8\"}],\"variable\":[]},\"header\":[{\"disabled\":false,\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:8080\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true}],\"method\":\"DELETE\",\"baseUrl\":\"http://localhost:8080\",\"body\":{},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":false,\"sessions\":{},\"data\":[{\"request\":{\"method\":\"DELETE\",\"href\":\"http://localhost:8080/api/comment/deleteComment?id=8\",\"headers\":[{\"key\":\"token\",\"value\":\"a66abb5684c45962d887564f08346e8d\"},{\"key\":\"User-Agent\",\"value\":\"Apifox/1.0.0 (https://apifox.com)\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Vary\",\"value\":\"Origin\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Method\"},{\"key\":\"Vary\",\"value\":\"Access-Control-Request-Headers\"},{\"key\":\"Content-Type\",\"value\":\"application/json\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"},{\"key\":\"Date\",\"value\":\"Wed, 18 Feb 2026 13:36:06 GMT\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=60\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"}],\"httpVersion\":\"1.1\"},\"timings\":{\"start\":1771421759149,\"requestStart\":1771421759149,\"offset\":{\"request\":0.4065000005066395,\"socket\":1.1493999995291233,\"lookup\":1.3627999983727932,\"connect\":1.8805999979376793,\"response\":7061.179800000042,\"end\":7064.438299998641,\"done\":7064.558199997991}}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1771421759099,\"preProcessorsStarted\":1771421759102,\"preProcessorsCompleted\":1771421759102,\"postProcessorsStarted\":1771421766226,\"postProcessorsCompleted\":1771421766226,\"completed\":1771421766228},\"metaInfo\":{\"httpApiId\":418758003,\"httpApiCaseId\":0,\"httpApiName\":\"删除评论\",\"httpApiPath\":\"/api/comment/deleteComment\",\"httpApiMethod\":\"delete\",\"httpApiCaseName\":\"\",\"moduleId\":6094669}}",
+                        "visibility": "INHERITED",
+                        "moduleId": 6094669,
+                        "categoryId": 0,
+                        "tagIds": [],
+                        "apiTestDataList": [],
+                        "preProcessors": [],
+                        "postProcessors": [],
+                        "inheritPostProcessors": {},
+                        "inheritPreProcessors": {}
+                      }
+                    ],
+                    "mocks": [],
+                    "customApiFields": "{}",
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "mockScript": {},
+                    "codeSamples": [],
+                    "commonResponseStatus": {},
+                    "responseChildren": [],
+                    "visibility": "INHERITED",
+                    "moduleId": 6094669,
+                    "oasExtensions": "",
+                    "type": "http",
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "socketCollection": [],
+  "docCollection": [],
+  "webSocketCollection": [],
+  "socketIOCollection": [],
+  "mcpClientCollection": [],
+  "responseCollection": [],
+  "schemaCollection": [],
+  "securitySchemeCollection": [],
+  "oasComponentCollection": [],
+  "requestCollection": [
+    {
+      "name": "根目录",
+      "children": [],
+      "items": [
+        {
+          "id": 3738539,
+          "createdAt": "2025-09-06T11:41:58.000Z",
+          "updatedAt": "2025-09-06T11:42:05.000Z",
+          "name": "http://localhost:8080/api/login",
+          "method": "post",
+          "path": "http://localhost:8080/api/login",
+          "requestBody": {
+            "type": "application/json",
+            "parameters": [],
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            },
+            "example": "{\r\n  \"username\": \"admin\",  \r\n  \"password\": \"123456\"  \r\n}",
+            "data": "{\r\n  \"username\": \"admin\",  \r\n  \"password\": \"123456\"  \r\n}"
+          },
+          "parameters": {},
+          "commonParameters": {
+            "query": [],
+            "body": [],
+            "header": [],
+            "cookie": []
+          },
+          "preProcessors": [],
+          "postProcessors": [],
+          "auth": {},
+          "advancedSettings": {},
+          "folderId": 0,
+          "projectId": 7037014,
+          "creatorId": 3091480,
+          "editorId": 3091480
+        },
+        {
+          "id": 3748693,
+          "createdAt": "2025-09-09T04:02:30.000Z",
+          "updatedAt": "2025-09-09T04:02:30.000Z",
+          "name": "添加用户",
+          "method": "post",
+          "path": "localhost:8080/api/addUser",
+          "requestBody": {
+            "type": "application/json",
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            },
+            "example": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"123\"\r\n}",
+            "data": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"123\"\r\n}"
+          },
+          "parameters": {},
+          "commonParameters": {
+            "query": [],
+            "body": [],
+            "header": [],
+            "cookie": []
+          },
+          "preProcessors": [],
+          "postProcessors": [],
+          "auth": {},
+          "advancedSettings": {},
+          "folderId": 0,
+          "projectId": 7037014,
+          "creatorId": 3091480,
+          "editorId": 3091480
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "commonScripts": [],
+  "globalVariables": [],
+  "commonParameters": null,
+  "customFunctions": [],
+  "projectTestCaseCategories": [
+    {
+      "id": 1474130,
+      "name": "正向",
+      "description": null
+    },
+    {
+      "id": 1474131,
+      "name": "负向",
+      "description": null
+    },
+    {
+      "id": 1474132,
+      "name": "边界值",
+      "description": null
+    },
+    {
+      "id": 1474133,
+      "name": "安全性",
+      "description": null
+    },
+    {
+      "id": 1474134,
+      "name": "其他",
+      "description": null
+    }
+  ],
+  "projectTestCaseTags": [],
+  "projectAssociations": []
+}
