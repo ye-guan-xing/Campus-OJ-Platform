@@ -3,7 +3,7 @@ import { getToken, setToken, removeToken } from "@/utils/auth";
 import { login as apiLogin, logout as apiLogout } from "@/api/user";
 import { getUserInfo } from "@/api/user"; // 按需启用
 
-const useMock = false; // 切换模拟或真实接口
+const useMock = true; // 切换模拟或真实接口
 
 const state = {
   token: getToken(),
