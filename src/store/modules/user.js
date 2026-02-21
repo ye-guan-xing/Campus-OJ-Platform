@@ -70,9 +70,11 @@ const actions = {
       // ========== 真实接口登录逻辑（适配后端返回格式） ==========
       apiLogin({ username, password })
         .then((response) => {
-          console.log("前端实际拿到的响应：", response.data);
+          console.log("前端实际拿到的响应：", response);
+          //mockuserinfo
+          // 响应拦截器已经返回了 response.data，所以 response 就是数据对象本身
           // 后端直接返回 {message: '登录成功', token: '...', id: '1', username: 'admin', roles: 'admin'}
-          const loginData = response.data;
+          const loginData = response;
 
           // 1. 校验登录状态（以message为判断依据）
           if (loginData.message !== "登录成功" || !loginData.token) {

@@ -35,7 +35,8 @@ request.interceptors.response.use(
     if (res.code === 1) {
       return res;
     } else {
-      ElMessage.error(res.message || "请求失败");
+      // ElMessage.error(res.message || "请求失败");
+      console.error(res.message || "请求失败");
       return Promise.reject(new Error(res.message || "请求失败"));
     }
   },

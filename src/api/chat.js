@@ -15,7 +15,7 @@ chatRequest.interceptors.response.use(
     if (res.code === 1) {
       return res;
     } else {
-      ElMessage.error(res.msg || '请求失败');
+      ElMessage.error(res.msg || '');
       return Promise.reject(new Error(res.msg || '请求失败'));
     }
   },
