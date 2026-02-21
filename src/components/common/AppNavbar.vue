@@ -16,6 +16,15 @@
           题目列表
         </router-link>
 
+        <router-link
+          v-if="isLoggedIn"
+          to="/chat"
+          class="navbar-item"
+          active-class="navbar-item-active"
+        >
+          AI助手
+        </router-link>
+
         <!-- 登录后显示的用户导航项 -->
         <template v-if="isLoggedIn">
           <!-- <router-link

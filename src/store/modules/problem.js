@@ -3,11 +3,7 @@ import { problemApi } from "@/api/problem";
 // import { mockStorage } from "@/utils/mockData"; // 导入模拟数据
 
 // 从环境变量读取配置
-<<<<<<< HEAD
-const USE_MOCK = true;
-=======
 // const USE_MOCK = false;
->>>>>>> 046ac67a20409f8a754c8ee24bba851179f9a0bd
 
 const state = {
   problems: [],

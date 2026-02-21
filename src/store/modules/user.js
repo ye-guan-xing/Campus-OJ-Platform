@@ -3,11 +3,7 @@ import { getToken, setToken, removeToken, getUserInfo as getStoredUserInfo, setU
 import { login as apiLogin, logout as apiLogout } from "@/api/user";
 import { getUserInfo } from "@/api/user"; // 按需启用
 
-<<<<<<< HEAD
-const useMock = true; // 切换模拟或真实接口
-=======
 // const useMock = false; // 切换模拟或真实接口
->>>>>>> 046ac67a20409f8a754c8ee24bba851179f9a0bd
 
 const state = {
   token: getToken(),
@@ -74,9 +70,9 @@ const actions = {
       // ========== 真实接口登录逻辑（适配后端返回格式） ==========
       apiLogin({ username, password })
         .then((response) => {
-          console.log("前端实际拿到的响应：", response);
+          console.log("前端实际拿到的响应：", response.data);
           // 后端直接返回 {message: '登录成功', token: '...', id: '1', username: 'admin', roles: 'admin'}
-          const loginData = response;
+          const loginData = response.data;
 
           // 1. 校验登录状态（以message为判断依据）
           if (loginData.message !== "登录成功" || !loginData.token) {

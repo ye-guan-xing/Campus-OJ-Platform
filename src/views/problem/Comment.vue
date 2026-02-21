@@ -56,7 +56,10 @@ const pageSize = 10;
 const replyToComment = ref(null);
 const commentInput = ref(null);
 
-const currentUserId = computed(() => store.getters['user/userInfo']?.id);
+const currentUserId = computed(() => store.getters.userInfo?.id);
+// 获取用户的id
+
+
 
 const fetchComments = async (isLoadMore = false) => {
   if (isLoadMore) {
@@ -106,11 +109,12 @@ const cancelReply = () => {
 };
 
 const handleSubmit = async (content) => {
-  if (!currentUserId.value) {
-    ElMessage.warning('请先登录');
-    router.push(`/login?redirect=${route.fullPath}`);
-    return;
-  }
+  console.log('currentUserId.value:', currentUserId.value);
+  // if (!currentUserId.value) {
+  //   ElMessage.warning('请先登录');
+  //   router.push(`/login?redirect=${route.fullPath}`);
+  //   return;
+  // }
 
   submitting.value = true;
   try {

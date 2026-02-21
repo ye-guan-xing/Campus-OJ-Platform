@@ -58,6 +58,12 @@ const publicRoutes = [
         component: () => import("@/views/submission/SubmissionHistory.vue"),
         meta: { title: "提交历史", requiresAuth: true },
       },
+      {
+        path: "chat",
+        name: "AIChat",
+        component: () => import("@/views/chat/ChatView.vue"),
+        meta: { title: "AI助手", requiresAuth: true },
+      },
     ],
   },
   {

@@ -14,7 +14,7 @@ export const problemApi = {
     try {
       if (FORCE_MOCK) throw new Error("Force Mock");
       return await request({
-        url: "/user/testQuestion/getTestQuestionByPage",
+        url: "/testQuestion/getTestQuestionByPage",
         method: "get",
         params,
       });

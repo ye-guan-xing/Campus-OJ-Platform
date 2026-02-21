@@ -1,18 +1,11 @@
 import request from "@/utils/request";
 import { mockStorage } from "@/utils/mockData";
 
-<<<<<<< HEAD
-//启用模拟数据
-const USE_MOCK = true;
-//模拟延迟
-const mockDelay = (ms = 500) =>
-=======
 // 是否强制使用 Mock 数据
 const FORCE_MOCK = false;
 
 // 模拟延迟
 const mockDelay = (ms = 300) =>
->>>>>>> 046ac67a20409f8a754c8ee24bba851179f9a0bd
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export const problemAdminAPI = {
