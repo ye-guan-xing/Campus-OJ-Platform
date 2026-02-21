@@ -78,7 +78,7 @@ const pagination = reactive({
   total: 0,
 });
 
-const problemList = ref([]);
+const problemList = ref([]); // 存储当前页显示的数据
 
 // 获取题目列表
 const fetchProblems = async () => {
@@ -90,21 +90,36 @@ const fetchProblems = async () => {
       keyword: searchKeyword.value.trim(),
     };
 
-    const res = await problemApi.getProblemList(params);
+    // 并发请求：获取当前页题目列表和总数
+    const [listRes, countRes] = await Promise.all([
+      problemApi.getProblemList(params),
+      problemApi.getProblemCount(searchKeyword.value.trim()),
+    ]);
 
-    if (res.code === 1 && Array.isArray(res.data)) {
-      problemList.value = res.data;
-      pagination.total = res.data.length;
-    } else if (res.code === 1 && res.data?.list) {
-      problemList.value = res.data.list;
-      pagination.total = res.data.total || res.data.list.length;
-    } else if (Array.isArray(res)) {
-      problemList.value = res;
-      pagination.total = res.length;
-    } else {
-      problemList.value = [];
-      pagination.total = 0;
+    console.log("题目列表API返回:", listRes);
+    console.log("题目总数API返回:", countRes);
+
+    // 处理题目列表
+    let dataArray = [];
+    if (listRes.code === 1) {
+      if (Array.isArray(listRes.data)) {
+        dataArray = listRes.data;
+      } else if (listRes.data?.list && Array.isArray(listRes.data.list)) {
+        dataArray = listRes.data.list;
+      }
     }
+
+    problemList.value = dataArray;
+
+    // 处理题目总数
+    if (countRes.code === 1 && countRes.data !== undefined) {
+      pagination.total = countRes.data;
+    } else {
+      pagination.total = dataArray.length;
+    }
+
+    console.log("当前页数据:", problemList.value);
+    console.log("题目总数:", pagination.total);
 
     if (problemList.value.length === 0 && searchKeyword.value.trim()) {
       ElMessage.info(`未找到包含"${searchKeyword.value}"的题目`);
@@ -130,7 +145,7 @@ const handleSearchClear = () => {
   fetchProblems();
 };
 
-// 分页相关函数
+// 分页相关函数 - 每次翻页都调用后端获取对应页数据
 const handleSizeChange = (size) => {
   pagination.size = size;
   pagination.pageNum = 1;

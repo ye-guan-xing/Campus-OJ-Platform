@@ -3,15 +3,34 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* 浅蓝到浅绿渐变（保留你指定的配色） */
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  /* 避免内容溢出时出现滚动条 */
+  overflow: hidden;
+  /* 去掉默认的margin/padding，适配全屏 */
+  margin: 0;
+  padding: 0;
 }
 
 .login-card {
   width: 400px;
+  /* 适配小屏幕，宽度最大400px，最小自适应 */
+  max-width: calc(100% - 40px);
   padding: 40px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 18px; /* 稍微增大圆角，更现代 */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* 优化阴影，更自然 */
+  /* 增加轻微的内阴影，提升层次感 */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  /* 卡片轻微上浮，增加立体感 */
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+/* 鼠标悬浮卡片时的动效（可选） */
+.login-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .login-header {

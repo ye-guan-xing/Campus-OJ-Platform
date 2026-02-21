@@ -1,13 +1,17 @@
 // 导入必要的接口和工具函数（根据useMock决定是否启用真实接口）
-import { getToken, setToken, removeToken } from "@/utils/auth";
+import { getToken, setToken, removeToken, getUserInfo as getStoredUserInfo, setUserInfo as setStoredUserInfo, removeUserInfo } from "@/utils/auth";
 import { login as apiLogin, logout as apiLogout } from "@/api/user";
 import { getUserInfo } from "@/api/user"; // 按需启用
 
+<<<<<<< HEAD
 const useMock = true; // 切换模拟或真实接口
+=======
+// const useMock = false; // 切换模拟或真实接口
+>>>>>>> 046ac67a20409f8a754c8ee24bba851179f9a0bd
 
 const state = {
   token: getToken(),
-  userInfo: null,
+  userInfo: getStoredUserInfo(),
 };
 
 // 2. 同步修改 state 的唯一入口
@@ -17,11 +21,13 @@ const mutations = {
   },
   SET_USER_INFO: (state, userInfo) => {
     state.userInfo = userInfo;
+    setStoredUserInfo(userInfo);
   },
   CLEAR_USER: (state) => {
     state.token = ""; // 小写 token
     state.userInfo = null;
     removeToken(); // 执行删除 Token 的函数（加括号）
+    removeUserInfo(); // 执行删除用户信息的函数
   },
 };
 
@@ -31,6 +37,7 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟登录逻辑 ==========
       if (useMock) {
         if (username === "admin" && password === "123456") {
@@ -62,6 +69,7 @@ const actions = {
         }
         return;
       }
+      */
 
       // ========== 真实接口登录逻辑（适配后端返回格式） ==========
       apiLogin({ username, password })
@@ -100,6 +108,7 @@ const actions = {
   // 获取用户信息（通过useMock切换模式）
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟获取用户信息逻辑 ==========
       if (useMock) {
         if (!state.token) {
@@ -131,6 +140,7 @@ const actions = {
         }
         return;
       }
+      */
 
       // ========== 真实接口获取用户信息逻辑（适配后端返回格式） ==========
       // 先判断当前userInfo是否已有roles
@@ -145,6 +155,21 @@ const actions = {
       // 正常逻辑：先校验Token是否存在
       if (!state.token) {
         reject("未登录，请先登录");
+        return;
+      }
+
+      // 尝试从localStorage获取用户信息
+      const storedUserInfo = getStoredUserInfo();
+      if (storedUserInfo?.username) {
+        // 确保roles字段存在
+        const userInfoWithRoles = {
+          ...storedUserInfo,
+          roles:
+            storedUserInfo.roles ||
+            (storedUserInfo.username === "admin" ? "admin" : "user"),
+        };
+        commit("SET_USER_INFO", userInfoWithRoles);
+        resolve(userInfoWithRoles);
         return;
       }
 
@@ -171,7 +196,15 @@ const actions = {
           resolve(userInfoWithRoles);
         })
         .catch((error) => {
-          reject(error.message || "获取用户信息失败");
+          console.error("获取用户信息失败:", error);
+          // 如果API调用失败，尝试使用登录时存储的用户信息
+          const loginUserInfo = state.userInfo;
+          if (loginUserInfo?.username) {
+            commit("SET_USER_INFO", loginUserInfo);
+            resolve(loginUserInfo);
+          } else {
+            reject(error.message || "获取用户信息失败");
+          }
         });
     });
   },
@@ -179,12 +212,14 @@ const actions = {
   // 退出登录（通过useMock切换模式）
   logout({ commit }) {
     return new Promise((resolve, reject) => {
+      /*
       // ========== 模拟退出逻辑 ==========
       if (useMock) {
         commit("CLEAR_USER");
         resolve();
         return;
       }
+      */
 
       // ========== 真实接口退出逻辑 ==========
       apiLogout()

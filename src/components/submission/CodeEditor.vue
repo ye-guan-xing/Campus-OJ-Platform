@@ -182,7 +182,7 @@ const initEditor = () => {
 // 处理提交
 const handleSubmit = async () => {
   if (!code.value.trim()) {
-    ElMessage.warning("请输入代码");
+    ElMessage.alert("请输入代码");
     return;
   }
 

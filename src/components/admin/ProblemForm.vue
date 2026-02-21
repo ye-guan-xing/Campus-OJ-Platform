@@ -88,8 +88,8 @@
 
               <el-form-item label="是否样例">
                 <el-radio-group v-model="item.isSample">
-                  <el-radio label="1">是（展示给用户）</el-radio>
-                  <el-radio label="0">否（仅后台评测）</el-radio>
+                  <el-radio value="1">是（展示给用户）</el-radio>
+                  <el-radio value="0">否（仅后台评测）</el-radio>
                 </el-radio-group>
               </el-form-item>
 
@@ -179,7 +179,7 @@ watch(
       const testPointList = newVal.testPointList?.map((item) => ({
         input: item.input || "",
         output: item.output || "",
-        isSample: item.isSample || "1",
+        isSample: String(item.isSample || "1"),
       })) || [{ input: "", output: "", isSample: "1" }];
 
       Object.assign(form, { ...newVal, testPointList });

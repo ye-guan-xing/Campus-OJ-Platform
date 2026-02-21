@@ -98,6 +98,7 @@ const handleLogin = async () => {
       password: formData.password,
     });
     // 2. 关键：登录后调用getInfo，获取包含roles的完整用户信息！
+    // console.log(formData.username, formData.password);
     const userInfo = await store.dispatch("user/getInfo");
     ElMessage.success(`登录成功，欢迎您，${userInfo.username}！`);
     const redirect = route.query.redirect || "/home";

@@ -2,12 +2,12 @@ import { problemAdminAPI } from "@/api/admin";
 import { submissionApi } from "@/api/submission";
 //开关见useMock
 // 模拟判题结果生成函数
-const generateMockJudgeResults = (testPointCount) => {
-  const results = ["AC", "WA", "TLE", "MLE", "RE"];
-  return Array.from({ length: testPointCount }, () => ({
-    value: results[Math.floor(Math.random() * results.length)],
-  }));
-};
+// const generateMockJudgeResults = (testPointCount) => {
+//   const results = ["AC", "WA", "TLE", "MLE", "RE"];
+//   return Array.from({ length: testPointCount }, () => ({
+//     value: results[Math.floor(Math.random() * results.length)],
+//   }));
+// };
 
 // 辅助方法：计算得分
 const calculateScore = (questionResultList) => {
@@ -81,7 +81,7 @@ const state = {
   // 当前提交结果
   currentSubmission: null,
   // 模拟数据开关 - 改为 false 使用真实API
-  useMock: true,
+  // useMock: true,
 };
 
 const mutations = {
@@ -101,6 +101,7 @@ const actions = {
     commit("UPDATE_SUBMIT_STATUS", { loading: true, error: null });
 
     try {
+      /*
       if (state.useMock) {
         // 模拟提交延迟
         await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -123,6 +124,7 @@ const actions = {
         commit("UPDATE_SUBMIT_STATUS", { loading: false, success: true });
         return mockResult;
       } else {
+      */
         // 真实接口调用
         console.log("调用真实API提交代码:", {
           id: problemId,
@@ -167,7 +169,7 @@ const actions = {
           console.error("API返回错误:", errorMsg);
           throw new Error(errorMsg);
         }
-      }
+      // }
     } catch (error) {
       console.error("提交代码错误:", error);
 
