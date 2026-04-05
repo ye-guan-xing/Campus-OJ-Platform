@@ -1,6 +1,6 @@
 # 这是一个完整的在线判题平台（前端后端开发完毕）
 
-## OJ Platform (在线判题平台) - 后端：https://github.com/shuimo0413/oj-docker
+## 后端：https://github.com/shuimo0413/oj-docker
 >（由我的朋友shuimo0413）开发，欢迎大家使用
 
 ---
