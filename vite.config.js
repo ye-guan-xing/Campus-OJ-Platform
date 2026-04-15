@@ -68,6 +68,11 @@ export default defineConfig(({ command, mode }) => {
             }
           },
         },
+        "/chat-api": {
+          target: "http://localhost:8000",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/chat-api/, "/api"),
+        },
       },
     },
     build: {

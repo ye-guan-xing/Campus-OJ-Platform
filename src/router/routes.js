@@ -64,6 +64,25 @@ const publicRoutes = [
         component: () => import("@/views/chat/ChatView.vue"),
         meta: { title: "AI助手", requiresAuth: true },
       },
+      {
+        path: "competitions",
+        name: "CompetitionManagement",
+        component: () =>
+          import("@/components/competition/CompetitionManagement.vue"),
+        meta: { title: "竞赛管理", requiresAuth: true },
+      },
+      {
+        path: "competitions/create",
+        name: "CompetitionCreate",
+        component: () => import("@/components/competition/CompetitionForm.vue"),
+        meta: { title: "发布竞赛", requiresAuth: true },
+      },
+      {
+        path: "competitions/:id/edit",
+        name: "CompetitionEdit",
+        component: () => import("@/components/competition/CompetitionForm.vue"),
+        meta: { title: "编辑竞赛", requiresAuth: true },
+      },
     ],
   },
   {

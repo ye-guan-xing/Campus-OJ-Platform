@@ -6,7 +6,10 @@
       </div>
 
       <!-- 主要导航菜单（分普通/管理员） -->
+
       <div class="navbar-menu">
+        
+
         <!-- 公共导航项 -->
         <router-link
           to="/problems"
@@ -51,6 +54,15 @@
           >
             管理后台
           </router-link>
+
+          <router-link
+          v-if="isAdmin"
+          to="/competitions"
+          class="navbar-item admin-item"
+          active-class="navbar-item-active"
+        >
+          竞赛管理
+        </router-link>
         </template>
       </div>
 
@@ -125,6 +137,8 @@ const logout = async () => {
     router.push("/login");
   }
 };
+
+
 </script>
 
 <style scoped>

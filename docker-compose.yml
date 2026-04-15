@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oj-frontend
+    ports:
+      - "80:80"
+    networks:
+      - shuimo
+    restart: unless-stopped
+    external_links:
+      - oj-app
+      - oj-recommend
+
+networks:
+  shuimo:
+    external: true
