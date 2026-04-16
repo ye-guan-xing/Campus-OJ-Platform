@@ -9,8 +9,8 @@
       <el-form-item label="开始时间" prop="startDatetime">
         <el-date-picker
           v-model="form.startDatetime"
-          type="date"
-          value-format="YYYY-MM-DD"
+          type="datetime"
+          value-format="YYYY-MM-DD HH:mm:ss"
           placeholder="请选择开始日期"
         />
       </el-form-item>
@@ -18,8 +18,8 @@
       <el-form-item label="结束时间" prop="endDatetime">
         <el-date-picker
           v-model="form.endDatetime"
-          type="date"
-          value-format="YYYY-MM-DD"
+          type="datetime"
+          value-format="YYYY-MM-DD HH:mm:ss"
           placeholder="请选择结束日期"
         />
       </el-form-item>
@@ -132,6 +132,7 @@ const handleSubmit = async () => {
       description: form.description.trim(),
       questionIds: form.questionIds.trim(),
     };
+    console.log("前端传给后端的参数：", payload);
     if (isEdit.value) {
       await competitionAPI.updateCompetition({
         id: form.id || Number(route.params.id),
